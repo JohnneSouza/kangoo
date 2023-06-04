@@ -2,15 +2,16 @@ import React, { useState } from "react";
 
 import './App.css';
 import { Board } from './components/tictactoe/board/Board';
-import { ResetButton } from "./components/tictactoe/reset/ResetButton";
+import { ResetButtonGame } from "./components/tictactoe/reset/ResetButtonGame";
+import { ResetButtonScore } from "./components/tictactoe/reset/ResetButtonScore";
 import { ScoreBoard } from "./components/tictactoe/score/ScoreBoard";
 
 function App() {
 
   const win_matrix = [
     [0, 1, 2],
-    [2, 3, 4],
     [3, 4, 5],
+    [6, 7, 8],
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
@@ -67,11 +68,16 @@ function App() {
     setBoard(Array(9).fill(null));
   }
 
+  const resetScore = () => {
+    setScores({ xScore: 0, oScore: 0 })
+  }
+
   return (
     <div className="App">
       <ScoreBoard scores={scores} xPlaying={xPlaying} />
       <Board board={board} onClick={gameOver ? resetGame : handleBoxClick} />
-      <ResetButton resetGame={resetGame} />
+      <ResetButtonGame resetGame={resetGame} />
+      <ResetButtonScore resetScore={resetScore} />
     </div>
   );
 }
