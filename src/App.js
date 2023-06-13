@@ -54,7 +54,6 @@ function App() {
 
     setXplaying(!xPlaying);
     setBoard(updatedBoard);
-
   }
 
   const checkWinner = (board) => {
@@ -68,7 +67,11 @@ function App() {
   }
 
   const checkTie = (board) => {
-    return board.filter(box => box === null).length === 0;
+    let isTie = board.filter(box => box === null).length === 0;
+    if (isTie) {
+      setGameOver(true);
+    }
+    return isTie;
   }
 
   const resetGame = () => {
