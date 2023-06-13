@@ -1,6 +1,6 @@
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 5.5rem);
+    grid-template-columns: repeat(8, 3rem);
     place-items: center;
     justify-content: center;
 }

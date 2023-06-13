@@ -9,6 +9,7 @@ export const Navbar = () => {
             <img className="img" src="/favicon.ico" alt="icon"></img>
             <Link className="link" to="/">Home</Link>
             <Link className="link" to="/tictactoe">Tic Tac Toe</Link>
+            <Link className="link" to="/othello">Othello</Link>
         </nav>
     )
 }

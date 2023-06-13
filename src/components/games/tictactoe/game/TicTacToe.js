@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Board } from "../board/Board";
+import { Grid } from "../grid/Grid";
 import { ResetButtonGame } from "../reset/ResetButtonGame";
 import { ResetButtonScore } from "../reset/ResetButtonScore";
 import { ScoreBoard } from "../score/ScoreBoard";
-
-import './TicTacToe.css';
 
 export const TicTacToe = () => {
 
@@ -84,9 +82,9 @@ export const TicTacToe = () => {
     }
 
     return (
-        <div className="App">
+        <div>
             <ScoreBoard scores={scores} />
-            <Board board={board} onClick={gameOver ? resetGame : handleBoxClick} />
+            <Grid board={board} onClick={gameOver ? resetGame : handleBoxClick} />
             <ResetButtonGame resetGame={resetGame} />
             <ResetButtonScore resetScore={resetScore} />
         </div>

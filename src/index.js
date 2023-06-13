@@ -6,7 +6,8 @@ import { Contact } from './components/main/contact/Contact';
 import { Home } from './components/main/home/Home';
 
 import App from './App';
-import { TicTacToe } from './components/tictactoe/game/TicTacToe';
+import { TicTacToe } from './components/games/tictactoe/game/TicTacToe';
+import Othello from './components/games/othello/game/Othello';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/tictactoe',
         element: <TicTacToe />
+      },
+      {
+        path: '/othello',
+        element: <Othello />
       },
       {
         path: '/contact',

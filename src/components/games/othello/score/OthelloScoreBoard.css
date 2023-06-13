@@ -1,0 +1,36 @@
+.otello-scoreboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 20rem;
+    font-size: 1.5em;
+    background-color: rgb(76, 167, 41);
+    margin: 3rem auto;
+    box-shadow: 0px 0px 8px #888;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+
+.score {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.black-score {
+    color: rgb(50, 50, 50);
+    border-bottom: 5px solid rgb(50, 50, 50);
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.white-score {
+    color: rgb(215, 215, 215);
+    border-bottom: 5px solid rgb(215, 215, 215);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.tie-score {
+    color: rgb(179, 54, 60);
+    border-bottom: 5px solid rgb(179, 54, 60);
+}
