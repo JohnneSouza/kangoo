@@ -30,6 +30,7 @@
     border-radius: 0 0.5rem 0.5rem 0;
 }
 
-.inactive {
-    border-bottom: 5px solid transparent;
+.t-score {
+    color: lightslategray;
+    border-bottom: 5px solid lightslategray;
 }

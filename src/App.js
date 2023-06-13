@@ -21,19 +21,20 @@ function App() {
 
   const [board, setBoard] = useState(Array(9).fill(null))
   const [xPlaying, setXplaying] = useState(true);
-  const [scores, setScores] = useState({ xScore: 0, oScore: 0 })
+  const [scores, setScores] = useState({ xScore: 0, oScore: 0, tScore: 0 })
   const [gameOver, setGameOver] = useState(false);
 
   const handleBoxClick = (boxIdx) => {
     const updatedBoard = board.map((value, idx) => {
-      if (idx === boxIdx) {
-        return xPlaying === true ? "X" : "O";
+      if (boxIdx === idx) {
+        return xPlaying ? "X" : "O";
       } else {
         return value;
       }
     })
 
     const winner = checkWinner(updatedBoard);
+    const tie = checkTie(updatedBoard);
 
     if (winner) {
       if (winner === "O") {
@@ -45,10 +46,14 @@ function App() {
         xScore += 1;
         setScores({ ...scores, xScore })
       }
+    } else if (tie) {
+      let { tScore } = scores;
+      tScore += 1;
+      setScores({ ...scores, tScore })
     }
 
-    setBoard(updatedBoard);
     setXplaying(!xPlaying);
+    setBoard(updatedBoard);
 
   }
 
@@ -60,7 +65,10 @@ function App() {
         return board[x];
       }
     }
+  }
 
+  const checkTie = (board) => {
+    return board.filter(box => box === null).length === 0;
   }
 
   const resetGame = () => {
@@ -69,12 +77,12 @@ function App() {
   }
 
   const resetScore = () => {
-    setScores({ xScore: 0, oScore: 0 })
+    setScores({ xScore: 0, oScore: 0, tScore: 0 })
   }
 
   return (
     <div className="App">
-      <ScoreBoard scores={scores} xPlaying={xPlaying} />
+      <ScoreBoard scores={scores} />
       <Board board={board} onClick={gameOver ? resetGame : handleBoxClick} />
       <ResetButtonGame resetGame={resetGame} />
       <ResetButtonScore resetScore={resetScore} />
