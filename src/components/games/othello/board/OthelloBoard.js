@@ -6,14 +6,14 @@ import './OthelloBoard.css'
 export const OthelloBoard = ({ board, onClick }) => {
 
     function isBoardFull() {
-        return board.every((value) => value !== null);
+        return board.every((x) => x.every((y) => y !== null));
     }
 
     return (
         <div className="board">
-            {board.map((value, idx) => {
-                return <Square key={idx} value={value} onClick={() => (value === null || isBoardFull()) && onClick(idx)} />
-            })}
+            {board.map((row, ridx) => row.map((col, cidx) => {
+                return <Square key={`${ridx}+${cidx}}`} value={col} onClick={() => (col === null || isBoardFull()) && onClick([ridx, cidx])} />
+            }))}
         </div>
     )
 }
