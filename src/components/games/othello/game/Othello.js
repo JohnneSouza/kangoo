@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { OthelloBoard } from "../board/OthelloBoard";
+import { Counter } from "../counter/Counter";
 import { OthelloScoreBoard } from "../score/OthelloScoreBoard";
 
 
@@ -13,6 +14,7 @@ export default function Othello() {
 
 
     const [board, setBoard] = useState(initialBoard);
+    const [pieces, setPieces] = useState({ black: 2, white: 2 });
     const [blackPlaying, setBlackPlaying] = useState(true);
     const [scores, setScores] = useState({ blackScore: 0, whiteScore: 0, tieScore: 0 })
     const [gameOver, setGameOver] = useState(false);
@@ -47,8 +49,15 @@ export default function Othello() {
             setScores({ ...scores, tieScore })
         }
 
+        updatePieces(updatedBoard);
         setBlackPlaying(!blackPlaying);
         setBoard(updatedBoard);
+    }
+
+    const updatePieces = (board) => {
+        const black = board.flat().filter((piece) => piece === "black").length;
+        const white = board.flat().filter((piece) => piece === "white").length;
+        setPieces({ black, white });
     }
 
     const checkWinner = (board) => {
@@ -70,12 +79,14 @@ export default function Othello() {
     const resetGame = () => {
         setGameOver(false);
         setBoard(initialBoard);
+        setPieces({ black: 2, white: 2 });
         setBlackPlaying(true);
     }
 
     return (
         <div>
             <OthelloScoreBoard scores={scores} />
+            <Counter pieces={pieces} />
             <OthelloBoard board={board} onClick={gameOver ? resetGame : handleSquareClick} />
         </div>
     )
