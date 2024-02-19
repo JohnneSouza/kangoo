@@ -6,7 +6,7 @@ import dev.kangoo.com.customers.service.CustomerService;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CustomersController implements Customer {
+public class CustomersController implements CustomerOperations {
 
     private final CustomerService customerService;
 

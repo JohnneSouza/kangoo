@@ -13,6 +13,10 @@ public abstract class Customer {
     @NotBlank(message = "The field 'firstName' should not be null or empty.")
     private String lastName;
 
+    @Schema(description = "Customer's email", example = "john.doe@provider.com")
+    @NotBlank(message = "The field 'email' should not be null or empty.")
+    private String email;
+
     public String getFirstName() {
         return firstName;
     }
@@ -29,4 +33,11 @@ public abstract class Customer {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
