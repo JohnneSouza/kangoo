@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Tag(name = "Customers")
 @RequestMapping("customers")
-public interface Customer {
+public interface CustomerOperations {
 
     @PostMapping
     @Operation(summary = "Creates a new Customer")
