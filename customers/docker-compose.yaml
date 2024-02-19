@@ -4,10 +4,11 @@ services:
     container_name: customers_postgres
     image: postgres
     environment:
-      POSTGRES_USERNAME: postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-    networks:
-      - postgres-network
+    ports:
+      - "5432:5432"
+
 
   pgadmin:
     container_name: customers_pgadmin
@@ -17,11 +18,3 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password
     ports:
       - "5050:80"
-    depends_on:
-      - postgres
-    networks:
-      - postgres-network
-
-networks:
-  postgres-network:
-    driver: bridge
