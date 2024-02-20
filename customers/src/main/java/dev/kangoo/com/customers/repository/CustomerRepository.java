@@ -8,4 +8,7 @@ import java.util.UUID;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<CustomerEntity, UUID> {
+
+    boolean existsByEmail(String email);
+
 }
