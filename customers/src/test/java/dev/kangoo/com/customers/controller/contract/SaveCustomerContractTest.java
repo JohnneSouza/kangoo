@@ -5,13 +5,14 @@ import dev.kangoo.com.customers.controller.CustomersController;
 import dev.kangoo.com.customers.domain.request.CustomerRequest;
 import dev.kangoo.com.customers.domain.request.CustomerRequestMock;
 import dev.kangoo.com.customers.service.CustomerService;
-import dev.kangoo.com.customers.testsconfig.TestContainersConfig;
+import dev.kangoo.com.customers.testsconfig.TestContainersAbstractConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -23,7 +24,8 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-public class CreateCustomerContractTest extends TestContainersConfig {
+@SpringBootTest
+public class SaveCustomerContractTest extends TestContainersAbstractConfig {
 
     @Autowired
     private CustomerService customerService;

@@ -1,18 +1,21 @@
 package dev.kangoo.com.customers;
 
+import dev.kangoo.com.customers.testsconfig.TestContainersAbstractConfig;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @SpringBootTest
-class CustomersApplicationTest {
+class CustomersApplicationTest extends TestContainersAbstractConfig {
 
     @Test
-    void contextLoads() {
-    }
+    void contextLoads(){}
 
     @Test
     public void mainExecution() {
-        CustomersApplication.main(new String[] {});
+        assertThrows(BeanCreationException.class, () -> CustomersApplication.main(new String[] {}));
     }
 
 }
