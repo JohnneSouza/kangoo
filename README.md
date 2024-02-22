@@ -1,4 +1,5 @@
 # Kangoo: An Open Source E-commerce Platform
+[![Customers Docker Image CI](https://github.com/JohnneSouza/kangoo/actions/workflows/customers-image.yml/badge.svg)](https://github.com/JohnneSouza/kangoo/actions/workflows/customers-image.yml)
 
 ## About Kangoo
 
