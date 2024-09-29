@@ -1,10 +1,18 @@
 type Query {
-    findById(id: ID): Customer
+    "Find a customers that has the provided ID"
+    findById(id: ID!): Customer
 }
 
 type Customer {
+    "Customer's unique identifier"
     id: ID
+
+    "Customer's first name"
     firstName: String!
+
+    "Customer's last name"
     lastName: String
+
+    "Customer's email"
     email: String!
 }
