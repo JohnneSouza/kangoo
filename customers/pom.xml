@@ -36,6 +36,12 @@
 
 		<!-- Others -->
 		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+
+		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
@@ -72,6 +78,24 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>io.github.kobylynskyi</groupId>
+				<artifactId>graphql-codegen-maven-plugin</artifactId>
+				<version>5.10.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<outputDir>${project.build.directory}/generated-sources/graphql</outputDir>
+							<packageName>com.kangoo.customers.domain.graphql</packageName>
+							<modelNameSuffix>DTO</modelNameSuffix>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
