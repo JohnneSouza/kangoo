@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: customers
+
+  data:
+    mongodb:
+      database: Customers
+      host: localhost
+      port: 27017
+
+security:
+  pepper: MY_SECURE_PEPPER

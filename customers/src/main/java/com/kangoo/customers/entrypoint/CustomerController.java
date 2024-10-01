@@ -1,9 +1,10 @@
 package com.kangoo.customers.entrypoint;
 
 import com.kangoo.customers.domain.graphql.CustomerDTO;
+import com.kangoo.customers.domain.graphql.RegisterCustomerInputDTO;
 import com.kangoo.customers.usecases.CustomersUseCase;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Mono;
 
@@ -17,9 +18,9 @@ public class CustomerController {
         this.customersUseCase = customersUseCase;
     }
 
-    @QueryMapping
-    public Mono<CustomerDTO> findById(@Argument String id){
-        return this.customersUseCase.findBydId(id);
+    @MutationMapping
+    public Mono<CustomerDTO> registerCustomer(@Argument("input") RegisterCustomerInputDTO input) {
+        return this.customersUseCase.registerCustomer(input);
     }
 
 }

@@ -3,6 +3,22 @@ type Query {
     findById(id: ID!): Customer
 }
 
+type Mutation {
+    "New user signup"
+    registerCustomer(input: RegisterCustomerInput!): Customer!
+}
+
+"Input type for registering a customer"
+input RegisterCustomerInput {
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String
+    address: String
+    birthDate: String
+    phoneNumber: String
+}
+
 type Customer {
     "Customer's unique identifier"
     id: ID

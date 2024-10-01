@@ -1,15 +1,19 @@
 package com.kangoo.customers.usecases;
 
 import com.kangoo.customers.domain.graphql.CustomerDTO;
-import lombok.AllArgsConstructor;
+import com.kangoo.customers.domain.graphql.RegisterCustomerInputDTO;
 import reactor.core.publisher.Mono;
 
-@AllArgsConstructor
 public class CustomersUseCase {
 
-    private CustomersOperations customersOperations;
+    private final CustomersOperations customersOperations;
 
-    public Mono<CustomerDTO> findBydId(String id) {
-        return this.customersOperations.findById(id);
+    public CustomersUseCase(CustomersOperations customersOperations) {
+        this.customersOperations = customersOperations;
     }
+
+    public Mono<CustomerDTO> registerCustomer(RegisterCustomerInputDTO registerCustomerInputDTO) {
+        return this.customersOperations.createCustomer(registerCustomerInputDTO);
+    }
+
 }
