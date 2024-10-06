@@ -47,7 +47,7 @@ public class CustomersService {
         return this.customerOperations.findByEmail(email).flatMap(entity -> {
             if (entity == null) return Mono.error(new UserNotFoundException("Could not find a user."));
             if (this.passwordService.isPasswordValid(password, entity.getSalt(), entity.getPassword())){
-                String token = this.jwtService.generateToken(entity.getId().toString());
+                String token = this.jwtService.generateToken(entity.getEmail());
                 setAuthorizationCookie(response, token);
                 return Mono.just(this.customerConverter.convertToDto(entity));
             }
