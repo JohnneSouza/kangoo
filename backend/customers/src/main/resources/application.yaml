@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: customers
+
+  data:
+    mongodb:
+      database: KangooDB
+      host: localhost
+      port: 27017
+
+security:
+  pepper: MY_SECURE_PEPPER
+
+springdoc:
+  version: '@springdoc.version@'
+  api-docs:
+    version: openapi_3_0
