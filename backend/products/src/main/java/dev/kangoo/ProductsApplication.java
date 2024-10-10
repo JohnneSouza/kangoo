@@ -1,4 +1,4 @@
-package com.kangoo;
+package dev.kangoo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

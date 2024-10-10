@@ -1,4 +1,4 @@
-package com.kangoo.domain.product;
+package dev.kangoo.domain.product;
 
 public class Product {
 

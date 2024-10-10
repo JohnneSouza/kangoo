@@ -1,4 +1,4 @@
-package com.kangoo.domain.product;
+package dev.kangoo.domain.product;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;

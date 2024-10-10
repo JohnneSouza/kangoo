@@ -1,8 +1,10 @@
-package com.kangoo.service;
+package dev.kangoo.service;
 
-import com.kangoo.domain.product.Product;
-import com.kangoo.domain.product.ProductEntity;
-import com.kangoo.repository.ProductsRepository;
+import dev.kangoo.domain.product.Product;
+import dev.kangoo.domain.product.ProductEntity;
+import dev.kangoo.repository.ProductsRepository;
+import org.bson.types.ObjectId;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -27,8 +29,15 @@ public class ProductsService {
         return this.productsRepository.save(productEntity);
     }
 
-    public Flux<ProductEntity> getAllProducts() {
-        return this.productsRepository.findAll();
+    public Flux<ProductEntity> getAllProducts(Pageable pageable) {
+        return this.productsRepository.findAllBy(pageable);
     }
 
+    public Mono<Long> countTotalProducts() {
+        return this.productsRepository.count();
+    }
+
+    public Mono<Void> deleteProductById(ObjectId productId) {
+        return this.productsRepository.deleteById(productId);
+    }
 }
