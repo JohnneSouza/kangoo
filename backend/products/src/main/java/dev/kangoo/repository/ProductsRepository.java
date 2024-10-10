@@ -7,6 +7,8 @@ import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 public interface ProductsRepository extends ReactiveSortingRepository<ProductEntity, ObjectId> {
 
     Flux<ProductEntity> findAllBy(Pageable pageable);
@@ -16,4 +18,6 @@ public interface ProductsRepository extends ReactiveSortingRepository<ProductEnt
     Mono<ProductEntity> save(ProductEntity productEntity);
 
     Mono<Void> deleteById(ObjectId productId);
+
+    Mono<ProductEntity> findById(ObjectId id);
 }
