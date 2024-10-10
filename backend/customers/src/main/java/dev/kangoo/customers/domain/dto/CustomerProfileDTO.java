@@ -1,7 +1,7 @@
-package com.kangoo.customers.domain.dto;
+package dev.kangoo.customers.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.Customer;
 
 @JsonPropertyOrder({"id"})
 public class CustomerProfileDTO extends Customer {

@@ -1,14 +1,14 @@
-package com.kangoo.customers.service;
+package dev.kangoo.customers.service;
 
-import com.kangoo.customers.config.authentication.JwtService;
-import com.kangoo.customers.config.utils.PasswordService;
-import com.kangoo.customers.converters.CustomerConverter;
-import com.kangoo.customers.domain.Customer;
-import com.kangoo.customers.domain.dto.CustomerProfileDTO;
-import com.kangoo.customers.domain.dto.CustomerSignupDTO;
-import com.kangoo.customers.domain.dto.CustomerSignupDTOMock;
-import com.kangoo.customers.domain.entity.CustomerEntityMock;
-import com.kangoo.customers.repository.CustomerOperations;
+import dev.kangoo.customers.config.authentication.JwtService;
+import dev.kangoo.customers.config.utils.PasswordService;
+import dev.kangoo.customers.converters.CustomerConverter;
+import dev.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
+import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
+import dev.kangoo.customers.domain.dto.CustomerSignupDTOMock;
+import dev.kangoo.customers.domain.entity.CustomerEntityMock;
+import dev.kangoo.customers.repository.CustomerOperations;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,4 +1,4 @@
-package com.kangoo.customers.domain.entity;
+package dev.kangoo.customers.domain.entity;
 
 import org.bson.types.ObjectId;
 

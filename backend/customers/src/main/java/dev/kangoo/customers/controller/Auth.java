@@ -1,7 +1,7 @@
-package com.kangoo.customers.controller;
+package dev.kangoo.customers.controller;
 
-import com.kangoo.customers.domain.dto.CustomerLoginDTO;
-import com.kangoo.customers.domain.dto.CustomerProfileDTO;
+import dev.kangoo.customers.domain.dto.CustomerLoginDTO;
+import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
 import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;

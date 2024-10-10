@@ -1,6 +1,6 @@
-package com.kangoo.customers.domain.dto;
+package dev.kangoo.customers.domain.dto;
 
-import com.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.Customer;
 
 public final class CustomerSignupDTO extends Customer {
 

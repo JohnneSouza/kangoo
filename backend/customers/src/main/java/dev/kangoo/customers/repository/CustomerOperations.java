@@ -1,6 +1,6 @@
-package com.kangoo.customers.repository;
+package dev.kangoo.customers.repository;
 
-import com.kangoo.customers.domain.entity.CustomerEntity;
+import dev.kangoo.customers.domain.entity.CustomerEntity;
 import org.bson.types.ObjectId;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;

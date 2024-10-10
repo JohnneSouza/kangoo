@@ -1,8 +1,8 @@
-package com.kangoo.customers.converters;
+package dev.kangoo.customers.converters;
 
-import com.kangoo.customers.domain.dto.CustomerProfileDTO;
-import com.kangoo.customers.domain.dto.CustomerSignupDTO;
-import com.kangoo.customers.domain.entity.CustomerEntity;
+import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
+import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
+import dev.kangoo.customers.domain.entity.CustomerEntity;
 import org.springframework.stereotype.Component;
 
 @Component

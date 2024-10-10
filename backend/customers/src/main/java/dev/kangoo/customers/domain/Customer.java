@@ -1,4 +1,4 @@
-package com.kangoo.customers.domain;
+package dev.kangoo.customers.domain;
 
 public abstract class Customer {
 

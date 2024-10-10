@@ -1,4 +1,4 @@
-package com.kangoo.customers.config.authentication;
+package dev.kangoo.customers.config.authentication;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

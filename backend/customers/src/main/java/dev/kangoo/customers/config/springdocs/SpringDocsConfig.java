@@ -1,4 +1,4 @@
-package com.kangoo.customers.config.springdocs;
+package dev.kangoo.customers.config.springdocs;
 
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;

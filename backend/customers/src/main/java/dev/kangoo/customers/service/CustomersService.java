@@ -1,15 +1,15 @@
-package com.kangoo.customers.service;
+package dev.kangoo.customers.service;
 
-import com.kangoo.customers.config.authentication.JwtService;
-import com.kangoo.customers.config.utils.PasswordService;
-import com.kangoo.customers.converters.Converter;
-import com.kangoo.customers.domain.Customer;
-import com.kangoo.customers.domain.dto.CustomerProfileDTO;
-import com.kangoo.customers.domain.dto.CustomerSignupDTO;
-import com.kangoo.customers.domain.entity.CustomerEntity;
-import com.kangoo.customers.domain.exceptions.InvalidUserCredentialsException;
-import com.kangoo.customers.domain.exceptions.UserNotFoundException;
-import com.kangoo.customers.repository.CustomerOperations;
+import dev.kangoo.customers.config.authentication.JwtService;
+import dev.kangoo.customers.config.utils.PasswordService;
+import dev.kangoo.customers.converters.Converter;
+import dev.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
+import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
+import dev.kangoo.customers.domain.entity.CustomerEntity;
+import dev.kangoo.customers.domain.exceptions.InvalidUserCredentialsException;
+import dev.kangoo.customers.domain.exceptions.UserNotFoundException;
+import dev.kangoo.customers.repository.CustomerOperations;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseCookie;

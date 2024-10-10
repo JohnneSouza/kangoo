@@ -1,10 +1,10 @@
-package com.kangoo.customers.converters;
+package dev.kangoo.customers.converters;
 
-import com.kangoo.customers.domain.dto.CustomerProfileDTO;
-import com.kangoo.customers.domain.dto.CustomerSignupDTO;
-import com.kangoo.customers.domain.dto.CustomerSignupDTOMock;
-import com.kangoo.customers.domain.entity.CustomerEntity;
-import com.kangoo.customers.domain.entity.CustomerEntityMock;
+import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
+import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
+import dev.kangoo.customers.domain.dto.CustomerSignupDTOMock;
+import dev.kangoo.customers.domain.entity.CustomerEntity;
+import dev.kangoo.customers.domain.entity.CustomerEntityMock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

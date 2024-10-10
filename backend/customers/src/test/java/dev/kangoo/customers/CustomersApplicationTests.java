@@ -1,4 +1,4 @@
-package com.kangoo.customers;
+package dev.kangoo.customers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

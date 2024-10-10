@@ -1,6 +1,6 @@
-package com.kangoo.customers.domain.entity;
+package dev.kangoo.customers.domain.entity;
 
-import com.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.Customer;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;

@@ -1,4 +1,4 @@
-package com.kangoo.customers.repository;
+package dev.kangoo.customers.repository;
 
 public class CustomerRepository {
 }

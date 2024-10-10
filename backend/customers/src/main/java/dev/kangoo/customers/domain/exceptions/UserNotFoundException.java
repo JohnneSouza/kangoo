@@ -1,4 +1,4 @@
-package com.kangoo.customers.domain.exceptions;
+package dev.kangoo.customers.domain.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
 

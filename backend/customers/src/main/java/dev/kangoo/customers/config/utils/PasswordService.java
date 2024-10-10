@@ -1,4 +1,4 @@
-package com.kangoo.customers.config.utils;
+package dev.kangoo.customers.config.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
