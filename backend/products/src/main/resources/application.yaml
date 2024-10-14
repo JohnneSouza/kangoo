@@ -15,3 +15,6 @@ cors:
 logging:
   level:
     web: debug
+
+server:
+  port: 8081

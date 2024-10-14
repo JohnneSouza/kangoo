@@ -2,13 +2,12 @@ package dev.kangoo.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.config.CorsRegistry;
-import org.springframework.web.reactive.config.EnableWebFlux;
-import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 @Configuration
-@EnableWebFlux
-public class CorsGlobalConfiguration implements WebFluxConfigurer {
+public class CorsGlobalConfiguration implements WebMvcConfigurer {
 
     @Value("${cors.allowedOrigins}")
     private String[] allowedOrigins;

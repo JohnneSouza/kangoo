@@ -7,13 +7,12 @@ import org.bson.types.ObjectId;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.List;
+
 
 @Service
 public class ProductsService {
@@ -24,7 +23,7 @@ public class ProductsService {
         this.productsRepository = productsRepository;
     }
 
-    public Mono<ProductEntity> addProduct(Product product) {
+    public ProductEntity addProduct(Product product) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setName(product.getName());
         productEntity.setPrice(product.getPrice());
@@ -35,28 +34,27 @@ public class ProductsService {
         return this.productsRepository.save(productEntity);
     }
 
-    public Flux<ProductEntity> getAllProducts(Pageable pageable) {
-        return this.productsRepository.findAllBy(pageable);
+    public List<ProductEntity> findAll() {
+        return this.productsRepository.findAll();
     }
 
     @Cacheable("totalProducts")
-    public Mono<Long> countTotalProducts() {
+    public Long countTotalProducts() {
         return this.productsRepository.count();
     }
 
     @Caching(evict = {@CacheEvict("totalProducts")})
-    public Mono<Void> deleteProductById(ObjectId productId) {
-        return this.productsRepository.deleteById(productId);
+    public void deleteProductById(ObjectId productId) {
+        this.productsRepository.deleteById(productId);
     }
 
-    public Mono<ProductEntity> findOneById(ObjectId id) {
-        return this.productsRepository.findById(id).flatMap(productEntity ->
-                productEntity != null ?
-                        Mono.just(productEntity) : Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)));
+    public ProductEntity findOneById(ObjectId id) {
+        return this.productsRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public Mono<ProductEntity> updateOne(ObjectId id, Product product) {
-        return this.findOneById(id).flatMap(existingProduct -> {
+    public ProductEntity updateOne(ObjectId id, Product product) {
+        ProductEntity existingProduct = this.findOneById(id);
             existingProduct.setName(product.getName().isBlank() ? existingProduct.getName() : product.getName());
             existingProduct.setPrice(product.getPrice() != null ? existingProduct.getPrice() : product.getPrice());
             existingProduct.setCategory(product.getCategory().isBlank() ? existingProduct.getCategory() : product.getCategory());
@@ -64,6 +62,6 @@ public class ProductsService {
             existingProduct.setImageUrl(product.getImageUrl().isBlank() ? existingProduct.getImageUrl() : product.getImageUrl());
 
             return this.productsRepository.save(existingProduct);
-        });
     }
+
 }

@@ -2,22 +2,11 @@ package dev.kangoo.repository;
 
 import dev.kangoo.domain.product.ProductEntity;
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.reactive.ReactiveSortingRepository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Optional;
 
-public interface ProductsRepository extends ReactiveSortingRepository<ProductEntity, ObjectId> {
+public interface ProductsRepository extends MongoRepository<ProductEntity, ObjectId> {
 
-    Flux<ProductEntity> findAllBy(Pageable pageable);
-
-    Mono<Long> count();
-
-    Mono<ProductEntity> save(ProductEntity productEntity);
-
-    Mono<Void> deleteById(ObjectId productId);
-
-    Mono<ProductEntity> findById(ObjectId id);
 }
