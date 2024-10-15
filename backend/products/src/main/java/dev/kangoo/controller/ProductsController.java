@@ -29,7 +29,6 @@ public class ProductsController implements ProductsAPI {
         this.productsService = productsService;
     }
 
-    @GetMapping
     public List<ProductEntity> findAll() {
         return this.productsService.findAll();
     }

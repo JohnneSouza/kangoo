@@ -35,7 +35,7 @@ public class ProductsService {
     }
 
     public List<ProductEntity> findAll() {
-        return this.productsRepository.findAll();
+        return this.productsRepository.findAll().stream().limit(50L).toList();
     }
 
     @Cacheable("totalProducts")

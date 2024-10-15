@@ -1,11 +1,26 @@
 package dev.kangoo.domain.product;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class Product {
 
+    @Schema(description = "The product name.", example = "Awesome Refrigerator")
     private String name;
+
+    @Schema(description = "A brief description of the product, highlighting its features and benefits.",
+            example = "This refrigerator features a spacious interior, energy efficiency, and a sleek design.")
     private String description;
+
+    @Schema(description = "The price of the product in USD.",
+            example = "599.99")
     private Double price;
+
+    @Schema(description = "A URL pointing to an image of the product.",
+            example = "https://example.com/images/awesome-refrigerator.jpg")
     private String imageUrl;
+
+    @Schema(description = "The category to which the product belongs, e.g., 'Appliances', 'Electronics'.",
+            example = "Appliances")
     private String category;
 
     public String getName() {
