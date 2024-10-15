@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,5 +52,21 @@ public interface ProductsAPI {
             )
     })
     List<ProductEntity> findAll();
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete a product with the given ID.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "Product removed."
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Product not found.",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+            )
+    })
+    void delete(@PathVariable String id);
 
 }

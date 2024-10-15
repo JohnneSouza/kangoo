@@ -48,9 +48,7 @@ public class ProductsController implements ProductsAPI {
     }
 
 
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void delete(@PathVariable String id) {
+    public void delete(String id) {
          this.productsService.deleteProductById(new ObjectId(id));
     }
 
