@@ -1,6 +1,7 @@
 package dev.kangoo.controller;
 
 import dev.kangoo.domain.dto.ErrorResponse;
+import dev.kangoo.domain.product.Product;
 import dev.kangoo.domain.product.ProductEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,12 +13,33 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
 @Tag(name = "Products", description = "Products managing API.")
 public interface ProductsAPI {
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a new product.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Product created with success.",
+                    content = @Content(schema = @Schema(implementation = ProductEntity.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid request data.",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+            )
+    })
+    ProductEntity save(@RequestBody Product product);
+
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -35,6 +57,28 @@ public interface ProductsAPI {
             )
     })
     ProductEntity findOne(@PathVariable String id);
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Update an existing product.")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Product updated with success.",
+                    content = @Content(schema = @Schema(implementation = ProductEntity.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Product not found.",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid request data.",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+            )
+    })
+    ProductEntity updateOne(@PathVariable String id, @RequestBody Product product);
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
