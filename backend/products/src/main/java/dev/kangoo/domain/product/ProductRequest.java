@@ -2,7 +2,9 @@ package dev.kangoo.domain.product;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public class Product {
+import java.math.BigDecimal;
+
+public abstract class ProductRequest {
 
     @Schema(description = "The product name.", example = "Awesome Refrigerator")
     private String name;
@@ -13,7 +15,7 @@ public class Product {
 
     @Schema(description = "The price of the product in USD.",
             example = "599.99")
-    private Double price;
+    private BigDecimal price;
 
     @Schema(description = "A URL pointing to an image of the product.",
             example = "https://example.com/images/awesome-refrigerator.jpg")
@@ -39,11 +41,11 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

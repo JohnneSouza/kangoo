@@ -1,7 +1,9 @@
 package dev.kangoo.service;
 
-import dev.kangoo.domain.product.Product;
-import dev.kangoo.domain.product.ProductResponseEntity;
+import dev.kangoo.domain.product.ProductEntity;
+import dev.kangoo.domain.product.ProductRequest;
+import dev.kangoo.domain.product.ProductResponse;
+import dev.kangoo.mappers.ProductMapper;
 import dev.kangoo.repository.ProductsRepository;
 import org.bson.types.ObjectId;
 import org.springframework.cache.annotation.CacheEvict;
@@ -18,24 +20,23 @@ import java.util.List;
 public class ProductsService {
 
     private final ProductsRepository productsRepository;
+    private final ProductMapper productMapper;
 
     public ProductsService(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
+        this.productMapper = ProductMapper.INSTANCE;
     }
 
-    public ProductResponseEntity addProduct(Product product) {
-        ProductResponseEntity productResponseEntity = new ProductResponseEntity();
-        productResponseEntity.setName(product.getName());
-        productResponseEntity.setPrice(product.getPrice());
-        productResponseEntity.setCategory(product.getCategory());
-        productResponseEntity.setDescription(product.getDescription());
-        productResponseEntity.setImageUrl(product.getImageUrl());
+    public ProductResponse addProduct(ProductRequest productRequest) {
+        ProductEntity entity = this.productMapper.mapToEntity(productRequest);
+        ProductEntity savedProduct = this.productsRepository.save(entity);
 
-        return this.productsRepository.save(productResponseEntity);
+        return this.productMapper.mapToResponse(savedProduct);
     }
 
-    public List<ProductResponseEntity> findAll() {
-        return this.productsRepository.findAll().stream().limit(50L).toList();
+    public List<ProductResponse> findAll() {
+        return this.productsRepository.findAll()
+                .stream().limit(50L).map(this.productMapper::mapToResponse).toList();
     }
 
     @Cacheable("totalProducts")
@@ -48,20 +49,17 @@ public class ProductsService {
         this.productsRepository.deleteById(productId);
     }
 
-    public ProductResponseEntity findOneById(ObjectId id) {
-        return this.productsRepository.findById(id).orElseThrow(() ->
+    public ProductResponse findOneById(ObjectId id) {
+        return this.productsRepository.findById(id).map(this.productMapper::mapToResponse).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public ProductResponseEntity updateOne(ObjectId id, Product product) {
-        ProductResponseEntity existingProduct = this.findOneById(id);
-            existingProduct.setName(product.getName().isBlank() ? existingProduct.getName() : product.getName());
-            existingProduct.setPrice(product.getPrice() != null ? existingProduct.getPrice() : product.getPrice());
-            existingProduct.setCategory(product.getCategory().isBlank() ? existingProduct.getCategory() : product.getCategory());
-            existingProduct.setDescription(product.getDescription().isBlank() ? existingProduct.getDescription() : product.getDescription());
-            existingProduct.setImageUrl(product.getImageUrl().isBlank() ? existingProduct.getImageUrl() : product.getImageUrl());
+    public ProductResponse updateOne(ObjectId id, ProductRequest productRequest) {
+        ProductResponse existingProduct = this.findOneById(id);
+        ProductEntity entity = this.productMapper.mapToEntity(existingProduct);
 
-            return this.productsRepository.save(existingProduct);
+        ProductEntity savedProduct = this.productsRepository.save(entity);
+        return this.productMapper.mapToResponse(savedProduct);
     }
 
 }

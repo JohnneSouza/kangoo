@@ -1,7 +1,7 @@
 package dev.kangoo.controller;
 
-import dev.kangoo.domain.product.Product;
-import dev.kangoo.domain.product.ProductResponseEntity;
+import dev.kangoo.domain.product.ProductRequest;
+import dev.kangoo.domain.product.ProductResponse;
 import dev.kangoo.service.ProductsService;
 import org.bson.types.ObjectId;
 import org.springframework.http.MediaType;
@@ -21,20 +21,20 @@ public class ProductsController implements ProductsAPI {
         this.productsService = productsService;
     }
 
-    public List<ProductResponseEntity> findAll() {
+    public List<ProductResponse> findAll() {
         return this.productsService.findAll();
     }
 
-    public ProductResponseEntity findOne(String id){
+    public ProductResponse findOne(String id){
         return this.productsService.findOneById(new ObjectId(id));
     }
 
-    public ProductResponseEntity updateOne(String id, Product product){
-        return this.productsService.updateOne(new ObjectId(id), product);
+    public ProductResponse updateOne(String id, ProductRequest productRequest){
+        return this.productsService.updateOne(new ObjectId(id), productRequest);
     }
 
-    public ProductResponseEntity save(Product product){
-        return this.productsService.addProduct(product);
+    public ProductResponse save(ProductRequest productRequest){
+        return this.productsService.addProduct(productRequest);
     }
 
 

@@ -1,8 +1,8 @@
 package dev.kangoo.controller;
 
 import dev.kangoo.domain.dto.ErrorResponse;
-import dev.kangoo.domain.product.Product;
-import dev.kangoo.domain.product.ProductResponseEntity;
+import dev.kangoo.domain.product.ProductRequest;
+import dev.kangoo.domain.product.ProductResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,7 +30,7 @@ public interface ProductsAPI {
             @ApiResponse(
                     responseCode = "201",
                     description = "Product created with success.",
-                    content = @Content(schema = @Schema(implementation = ProductResponseEntity.class))
+                    content = @Content(schema = @Schema(implementation = ProductResponse.class))
             ),
             @ApiResponse(
                     responseCode = "400",
@@ -38,7 +38,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ProductResponseEntity save(@RequestBody Product product);
+    ProductResponse save(@RequestBody ProductRequest productRequest);
 
 
     @GetMapping("{id}")
@@ -48,7 +48,7 @@ public interface ProductsAPI {
             @ApiResponse(
                     responseCode = "200",
                     description = "Product found.",
-                    content = @Content(schema = @Schema(implementation = ProductResponseEntity.class))
+                    content = @Content(schema = @Schema(implementation = ProductResponse.class))
             ),
             @ApiResponse(
                     responseCode = "404",
@@ -56,7 +56,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ProductResponseEntity findOne(@PathVariable String id);
+    ProductResponse findOne(@PathVariable String id);
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -65,7 +65,7 @@ public interface ProductsAPI {
             @ApiResponse(
                     responseCode = "200",
                     description = "Product updated with success.",
-                    content = @Content(schema = @Schema(implementation = ProductResponseEntity.class))
+                    content = @Content(schema = @Schema(implementation = ProductResponse.class))
             ),
             @ApiResponse(
                     responseCode = "404",
@@ -78,7 +78,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ProductResponseEntity updateOne(@PathVariable String id, @RequestBody Product product);
+    ProductResponse updateOne(@PathVariable String id, @RequestBody ProductRequest productRequest);
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -87,7 +87,7 @@ public interface ProductsAPI {
             @ApiResponse(
                     responseCode = "200",
                     description = "Products found.",
-                    content = @Content(schema = @Schema(implementation = ProductResponseEntity.class))
+                    content = @Content(schema = @Schema(implementation = ProductResponse.class))
             ),
             @ApiResponse(
                     responseCode = "404",
@@ -95,7 +95,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    List<ProductResponseEntity> findAll();
+    List<ProductResponse> findAll();
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

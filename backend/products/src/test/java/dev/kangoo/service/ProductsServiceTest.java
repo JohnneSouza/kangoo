@@ -1,6 +1,6 @@
 package dev.kangoo.service;
 
-import dev.kangoo.domain.product.ProductResponseEntity;
+import dev.kangoo.domain.product.ProductResponse;
 import dev.kangoo.repository.ProductsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +29,7 @@ class ProductsServiceTest {
         Mockito.when(this.productsRepository.findAll()).thenReturn(new ArrayList<>());
 
         // When
-        List<ProductResponseEntity> productsList = this.productsService.findAll();
+        List<ProductResponse> productsList = this.productsService.findAll();
 
         // Then
         assertNotNull(productsList);
