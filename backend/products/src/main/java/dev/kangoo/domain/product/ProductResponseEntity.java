@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Products")
 @JsonPropertyOrder(value = {"id"})
-public class ProductEntity extends Product{
+public class ProductResponseEntity extends Product{
 
     @Id
     @Schema(description = "The product unique identifier.", example = "6704bda3594e1e0331418105")

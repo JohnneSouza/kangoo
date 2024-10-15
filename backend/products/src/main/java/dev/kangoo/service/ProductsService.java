@@ -1,7 +1,7 @@
 package dev.kangoo.service;
 
 import dev.kangoo.domain.product.Product;
-import dev.kangoo.domain.product.ProductEntity;
+import dev.kangoo.domain.product.ProductResponseEntity;
 import dev.kangoo.repository.ProductsRepository;
 import org.bson.types.ObjectId;
 import org.springframework.cache.annotation.CacheEvict;
@@ -23,18 +23,18 @@ public class ProductsService {
         this.productsRepository = productsRepository;
     }
 
-    public ProductEntity addProduct(Product product) {
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setName(product.getName());
-        productEntity.setPrice(product.getPrice());
-        productEntity.setCategory(product.getCategory());
-        productEntity.setDescription(product.getDescription());
-        productEntity.setImageUrl(product.getImageUrl());
+    public ProductResponseEntity addProduct(Product product) {
+        ProductResponseEntity productResponseEntity = new ProductResponseEntity();
+        productResponseEntity.setName(product.getName());
+        productResponseEntity.setPrice(product.getPrice());
+        productResponseEntity.setCategory(product.getCategory());
+        productResponseEntity.setDescription(product.getDescription());
+        productResponseEntity.setImageUrl(product.getImageUrl());
 
-        return this.productsRepository.save(productEntity);
+        return this.productsRepository.save(productResponseEntity);
     }
 
-    public List<ProductEntity> findAll() {
+    public List<ProductResponseEntity> findAll() {
         return this.productsRepository.findAll().stream().limit(50L).toList();
     }
 
@@ -48,13 +48,13 @@ public class ProductsService {
         this.productsRepository.deleteById(productId);
     }
 
-    public ProductEntity findOneById(ObjectId id) {
+    public ProductResponseEntity findOneById(ObjectId id) {
         return this.productsRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public ProductEntity updateOne(ObjectId id, Product product) {
-        ProductEntity existingProduct = this.findOneById(id);
+    public ProductResponseEntity updateOne(ObjectId id, Product product) {
+        ProductResponseEntity existingProduct = this.findOneById(id);
             existingProduct.setName(product.getName().isBlank() ? existingProduct.getName() : product.getName());
             existingProduct.setPrice(product.getPrice() != null ? existingProduct.getPrice() : product.getPrice());
             existingProduct.setCategory(product.getCategory().isBlank() ? existingProduct.getCategory() : product.getCategory());
