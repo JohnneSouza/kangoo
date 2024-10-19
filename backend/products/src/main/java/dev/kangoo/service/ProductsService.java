@@ -1,5 +1,6 @@
 package dev.kangoo.service;
 
+import dev.kangoo.exceptions.ProductNotFoundException;
 import dev.kangoo.domain.product.ProductEntity;
 import dev.kangoo.domain.product.ProductRequest;
 import dev.kangoo.domain.product.ProductResponse;
@@ -7,13 +8,10 @@ import dev.kangoo.mappers.ProductMapper;
 import dev.kangoo.repository.ProductsRepository;
 import org.bson.types.ObjectId;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 
 @Service
@@ -27,39 +25,38 @@ public class ProductsService {
         this.productMapper = ProductMapper.INSTANCE;
     }
 
-    public ProductResponse addProduct(ProductRequest productRequest) {
+    public Mono<ProductResponse> addProduct(ProductRequest productRequest) {
         ProductEntity entity = this.productMapper.mapToEntity(productRequest);
-        ProductEntity savedProduct = this.productsRepository.save(entity);
+        Mono<ProductEntity> savedProduct = this.productsRepository.save(entity);
 
-        return this.productMapper.mapToResponse(savedProduct);
+        return savedProduct.map(productEntity -> this.productMapper.mapToResponse(entity));
     }
 
-    public List<ProductResponse> findAll() {
-        return this.productsRepository.findAll()
-                .stream().limit(50L).map(this.productMapper::mapToResponse).toList();
-    }
-
-    @Cacheable("totalProducts")
-    public Long countTotalProducts() {
-        return this.productsRepository.count();
+    public Flux<ProductResponse> findAll() {
+        return this.productsRepository.findAll().limitRate(50).map(this.productMapper::mapToResponse);
     }
 
     @Caching(evict = {@CacheEvict("totalProducts")})
-    public void deleteProductById(ObjectId productId) {
-        this.productsRepository.deleteById(productId);
+    public Mono<Void> deleteProductById(ObjectId productId) {
+        return this.productsRepository.findById(productId)
+                .switchIfEmpty(Mono.error(new ProductNotFoundException("Product not found with id: " + productId)))
+                .flatMap(existingProduct -> this.productsRepository.deleteById(productId));
     }
 
-    public ProductResponse findOneById(ObjectId id) {
-        return this.productsRepository.findById(id).map(this.productMapper::mapToResponse).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public Mono<ProductResponse> findOneById(ObjectId id) {
+        return this.productsRepository.findById(id)
+                .switchIfEmpty(Mono.error(new ProductNotFoundException("Product not found with id: " + id)))
+                .map(productMapper::mapToResponse);
     }
 
-    public ProductResponse updateOne(ObjectId id, ProductRequest productRequest) {
-        ProductResponse existingProduct = this.findOneById(id);
-        ProductEntity entity = this.productMapper.mapToEntity(existingProduct);
-
-        ProductEntity savedProduct = this.productsRepository.save(entity);
-        return this.productMapper.mapToResponse(savedProduct);
+    public Mono<ProductResponse> updateOne(ObjectId id, ProductRequest productRequest) {
+        return this.productsRepository.findById(id)
+                .switchIfEmpty(Mono.error(new ProductNotFoundException("Product not found with id: " + id)))
+                .flatMap(existingProduct -> {
+                    ProductEntity updatedEntity = productMapper.mapToEntity(productRequest);
+                    updatedEntity.setId(existingProduct.getId());
+                    return productsRepository.save(updatedEntity);
+                })
+                .map(productMapper::mapToResponse);
     }
-
 }

@@ -1,10 +1,11 @@
 package dev.kangoo.repository;
 
 import dev.kangoo.domain.product.ProductEntity;
-import dev.kangoo.domain.product.ProductResponse;
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProductsRepository extends MongoRepository<ProductEntity, ObjectId> {
+@Repository
+public interface ProductsRepository extends ReactiveMongoRepository<ProductEntity, ObjectId> {
 
 }

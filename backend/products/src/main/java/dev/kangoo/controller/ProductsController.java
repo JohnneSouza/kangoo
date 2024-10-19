@@ -7,8 +7,8 @@ import org.bson.types.ObjectId;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping(value = "products",
@@ -21,25 +21,25 @@ public class ProductsController implements ProductsAPI {
         this.productsService = productsService;
     }
 
-    public List<ProductResponse> findAll() {
+    public Flux<ProductResponse> findAll() {
         return this.productsService.findAll();
     }
 
-    public ProductResponse findOne(String id){
+    public Mono<ProductResponse> findOne(String id){
         return this.productsService.findOneById(new ObjectId(id));
     }
 
-    public ProductResponse updateOne(String id, ProductRequest productRequest){
+    public Mono<ProductResponse> updateOne(String id, ProductRequest productRequest){
         return this.productsService.updateOne(new ObjectId(id), productRequest);
     }
 
-    public ProductResponse save(ProductRequest productRequest){
+    public Mono<ProductResponse> save(ProductRequest productRequest){
         return this.productsService.addProduct(productRequest);
     }
 
 
-    public void delete(String id) {
-         this.productsService.deleteProductById(new ObjectId(id));
+    public Mono<Void> delete(String id) {
+         return this.productsService.deleteProductById(new ObjectId(id));
     }
 
 }

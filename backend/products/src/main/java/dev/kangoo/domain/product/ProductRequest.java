@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 
-public abstract class ProductRequest {
+public class ProductRequest {
 
     @Schema(description = "The product name.", example = "Awesome Refrigerator")
     private String name;

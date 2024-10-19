@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Tag(name = "Products", description = "Products managing API.")
 public interface ProductsAPI {
@@ -38,7 +38,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ProductResponse save(@RequestBody ProductRequest productRequest);
+    Mono<ProductResponse> save(@RequestBody ProductRequest productRequest);
 
 
     @GetMapping("{id}")
@@ -56,7 +56,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ProductResponse findOne(@PathVariable String id);
+    Mono<ProductResponse> findOne(@PathVariable String id);
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -78,7 +78,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    ProductResponse updateOne(@PathVariable String id, @RequestBody ProductRequest productRequest);
+    Mono<ProductResponse> updateOne(@PathVariable String id, @RequestBody ProductRequest productRequest);
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -95,7 +95,7 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    List<ProductResponse> findAll();
+    Flux<ProductResponse> findAll();
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -111,6 +111,6 @@ public interface ProductsAPI {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    void delete(@PathVariable String id);
+    Mono<Void> delete(@PathVariable String id);
 
 }

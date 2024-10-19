@@ -10,7 +10,7 @@ spring:
       port: 27017
 
 cors:
-  allowedOrigins: 'http://localhost:5173'
+
 
 logging:
   level:
