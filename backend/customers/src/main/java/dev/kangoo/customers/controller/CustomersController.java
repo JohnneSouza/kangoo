@@ -1,6 +1,8 @@
 package dev.kangoo.customers.controller;
 
 import dev.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.dto.AuthResponseDTO;
+import dev.kangoo.customers.domain.dto.CustomerLoginDTO;
 import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
 import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
 import dev.kangoo.customers.service.CustomersService;
@@ -8,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +40,11 @@ public class CustomersController {
     public ResponseEntity<Mono<CustomerProfileDTO>> updateCustomer(@RequestBody CustomerSignupDTO customerSignupDTO,
                                                                    @PathVariable String id) {
         return new ResponseEntity<>(this.customersService.update(id, customerSignupDTO));
+    }
+
+    @PostMapping("/authenticate")
+    public Mono<AuthResponseDTO> login(@RequestBody CustomerLoginDTO login) {
+        return this.customersService.login(login.getUsername(), login.getPassword());
     }
 
 

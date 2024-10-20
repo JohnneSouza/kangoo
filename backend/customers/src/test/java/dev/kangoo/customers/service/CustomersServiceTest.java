@@ -4,11 +4,15 @@ import dev.kangoo.customers.config.authentication.JwtService;
 import dev.kangoo.customers.config.utils.PasswordService;
 import dev.kangoo.customers.converters.CustomerConverter;
 import dev.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.dto.AuthResponseDTO;
 import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
 import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
 import dev.kangoo.customers.domain.dto.CustomerSignupDTOMock;
+import dev.kangoo.customers.domain.entity.CustomerEntity;
 import dev.kangoo.customers.domain.entity.CustomerEntityMock;
 import dev.kangoo.customers.repository.CustomerOperations;
+import org.bson.types.ObjectId;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,6 +23,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -60,23 +66,19 @@ class CustomersServiceTest {
     @Test
     void login() {
         // Arrange
-        String token = "Bearer123";
-        String email = "email@provider.com";
-        String password = "password";
+        CustomerEntity customerEntity = CustomerEntityMock.withAllFields();
 
-        ServerHttpResponse serverHttpResponse = Mockito.mock(ServerHttpResponse.class);
-
-        Mockito.when(this.customerOperations.findByEmail(email))
+        Mockito.when(this.customerOperations.findByEmail(customerEntity.getEmail()))
                 .thenReturn(Mono.just(CustomerEntityMock.withAllFields()));
-        Mockito.when(this.passwordService.isPasswordValid(eq(password), any(), any()))
+        Mockito.when(this.passwordService.isPasswordValid(eq(customerEntity.getPassword()), any(), any()))
                 .thenReturn(true);
-        Mockito.when(this.jwtService.generateToken(email))
-                .thenReturn(token);
+        Mockito.when(this.jwtService.createToken(customerEntity.getEmail()))
+                .thenReturn("randomToken");
 
         // Act
-        Mono<CustomerProfileDTO> login = this.customerService.login(email, password, serverHttpResponse);
+        Mono<AuthResponseDTO> login = this.customerService.login(customerEntity.getEmail(), customerEntity.getPassword());
 
         // Assert
-        StepVerifier.create(login).assertNext(response -> assertNotNull(response.getEmail())).verifyComplete();
+        StepVerifier.create(login).assertNext(Assertions::assertNotNull).verifyComplete();
     }
 }

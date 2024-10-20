@@ -6,6 +6,7 @@ public abstract class Customer {
     private String lastName;
     private String email;
     private String phone;
+    private String profilePicture;
 
     public String getFirstName() {
         return firstName;
@@ -37,6 +38,14 @@ public abstract class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
 }

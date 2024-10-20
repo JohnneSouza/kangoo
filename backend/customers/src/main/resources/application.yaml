@@ -8,6 +8,9 @@ spring:
       host: localhost
       port: 27017
 
+cors:
+  allowedOrigins: 'http://localhost:5173'
+
 security:
   pepper: MY_SECURE_PEPPER
 
@@ -15,3 +18,6 @@ springdoc:
   version: '@springdoc.version@'
   api-docs:
     version: openapi_3_0
+
+server:
+  port: 8081

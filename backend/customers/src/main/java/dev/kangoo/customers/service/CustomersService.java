@@ -4,6 +4,7 @@ import dev.kangoo.customers.config.authentication.JwtService;
 import dev.kangoo.customers.config.utils.PasswordService;
 import dev.kangoo.customers.converters.Converter;
 import dev.kangoo.customers.domain.Customer;
+import dev.kangoo.customers.domain.dto.AuthResponseDTO;
 import dev.kangoo.customers.domain.dto.CustomerProfileDTO;
 import dev.kangoo.customers.domain.dto.CustomerSignupDTO;
 import dev.kangoo.customers.domain.entity.CustomerEntity;
@@ -39,18 +40,23 @@ public class CustomersService {
         String salt = this.passwordService.generateSalt();
 
         CustomerEntity customerEntity = this.customerConverter.convertToEntity(customer);
+        customerEntity.setSalt(salt);
         customerEntity.setPassword(this.passwordService.hashPassword(customer.getPassword(), salt));
 
         return this.customerOperations.save(customerEntity).map(this.customerConverter::convertToDto);
     }
 
-    public Mono<CustomerProfileDTO> login(String email, String password, ServerHttpResponse response) {
+    public Mono<AuthResponseDTO> login(String email, String password) {
         return this.customerOperations.findByEmail(email).flatMap(entity -> {
             if (entity == null) return Mono.error(new UserNotFoundException("Could not find a user."));
             if (this.passwordService.isPasswordValid(password, entity.getSalt(), entity.getPassword())){
-                String token = this.jwtService.generateToken(entity.getEmail());
-                setAuthorizationCookie(response, token);
-                return Mono.just(this.customerConverter.convertToDto(entity));
+                String token = this.jwtService.createToken(entity.getId().toString());
+                AuthResponseDTO authResponseDTO  = new AuthResponseDTO();
+                authResponseDTO.setToken(token);
+                authResponseDTO.getCustomer().setId(entity.getId().toString());
+                authResponseDTO.getCustomer().setAvatar(entity.getProfilePicture());
+                authResponseDTO.getCustomer().setFullName(entity.getFirstName() + " " + entity.getLastName());
+                return Mono.just(authResponseDTO);
             }
             return Mono.error(new InvalidUserCredentialsException("The credentials provided are not valid."));
         });
@@ -60,10 +66,4 @@ public class CustomersService {
         return null;
     }
 
-    private static void setAuthorizationCookie(ServerHttpResponse response, String token) {
-        response.addCookie(ResponseCookie.from(HttpHeaders.AUTHORIZATION, token)
-                .maxAge(Duration.ofHours(1))
-                .secure(true)
-                .build());
-    }
 }
