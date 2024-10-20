@@ -29,7 +29,7 @@ public class ProductsService {
         ProductEntity entity = this.productMapper.mapToEntity(productRequest);
         Mono<ProductEntity> savedProduct = this.productsRepository.save(entity);
 
-        return savedProduct.map(productEntity -> this.productMapper.mapToResponse(entity));
+        return savedProduct.map(this.productMapper::mapToResponse);
     }
 
     public Flux<ProductResponse> findAll() {
