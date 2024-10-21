@@ -14,6 +14,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>parent</name>
 	<description>Kangoo Parent</description>
+	<modules>
+		<module>identity</module>
+	</modules>
 
 	<packaging>pom</packaging>
 
@@ -58,6 +61,13 @@
 		</dependency>
 
 		<!-- Spring DOCs -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-common</artifactId>
+			<version>${springdoc.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webflux-api</artifactId>
