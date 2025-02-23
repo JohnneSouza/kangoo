@@ -1,13 +1,9 @@
 package dev.kangoo.auth.domain;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
 
-@Getter
-@RequiredArgsConstructor
 public enum UserRoles {
     ADMIN {
         @Override

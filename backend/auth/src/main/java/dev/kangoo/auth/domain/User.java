@@ -1,15 +1,11 @@
 package dev.kangoo.auth.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 
-@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
     private String id;
@@ -68,7 +64,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setLogin(String login) {
+    public void setUsername(String login) {
         this.login = login;
     }
 
