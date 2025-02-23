@@ -9,6 +9,10 @@
 .idea/**
 **/.idea/**
 
+# Athentication Stuff
+**/*.key
+**/*.pub
+
 # File-based project format
 *.iws
 
