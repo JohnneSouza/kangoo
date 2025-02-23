@@ -18,9 +18,11 @@ public class UserService {
     public User findByUsername(String username) {
         UserEntity userEntity = this.userRepository.findByUsername(username);
         User user = new User();
+        user.setId(userEntity.getId());
         user.setUsername(userEntity.getUsername());
         user.setPassword(userEntity.getPasswordHash());
         user.setRole(UserRoles.ADMIN);
+        user.setEnabled(userEntity.isEnabled());
         return user;
     }
 }

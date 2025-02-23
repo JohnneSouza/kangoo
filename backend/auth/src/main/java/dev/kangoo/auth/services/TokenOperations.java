@@ -2,6 +2,7 @@ package dev.kangoo.auth.services;
 
 import dev.kangoo.auth.domain.AuthRequest;
 import dev.kangoo.auth.domain.AuthResponse;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -23,11 +24,13 @@ public class TokenOperations implements TokenService {
     }
 
     @Override
-    public AuthResponse generateToken(AuthRequest authRequest) {
+    public AuthResponse generateToken(UserDetails userDetails) {
         Instant now = Instant.now();
+
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .issuer(KANGOO_AUTH_SERVICE)
-                .subject(authRequest.getUsername())
+                .claim("name", "John Doe")
+                .subject(userDetails.getUsername())
                 .issuedAt(now)
                 .expiresAt(now.plus(2L, ChronoUnit.HOURS))
                 .build();

@@ -8,6 +8,7 @@ public class UserEntity {
     private String email;
     private String passwordHash;
     private UserRoles userRoles;
+    private boolean enabled;
 
     public String getId() {
         return id;
@@ -55,5 +56,13 @@ public class UserEntity {
 
     public void setUserRoles(UserRoles userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
