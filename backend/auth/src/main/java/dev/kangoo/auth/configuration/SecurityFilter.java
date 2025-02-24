@@ -1,7 +1,7 @@
 package dev.kangoo.auth.configuration;
 
-import dev.kangoo.auth.domain.User;
-import dev.kangoo.auth.domain.UserRoles;
+import dev.kangoo.auth.domain.model.AuthUser;
+import dev.kangoo.auth.domain.model.UserRoles;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,10 +24,10 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
-            User user = new User();
-            user.setRole(UserRoles.ADMIN);
-            user.setPassword(new BCryptPasswordEncoder().encode("bla"));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            AuthUser authUser = new AuthUser();
+            authUser.setRole(UserRoles.ADMIN);
+            authUser.setPassword(new BCryptPasswordEncoder().encode("bla"));
+            var authentication = new UsernamePasswordAuthenticationToken(authUser, null, authUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 

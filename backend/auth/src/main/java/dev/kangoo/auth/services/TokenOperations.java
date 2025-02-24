@@ -1,7 +1,6 @@
 package dev.kangoo.auth.services;
 
-import dev.kangoo.auth.domain.AuthRequest;
-import dev.kangoo.auth.domain.AuthResponse;
+import dev.kangoo.auth.domain.response.AuthResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;

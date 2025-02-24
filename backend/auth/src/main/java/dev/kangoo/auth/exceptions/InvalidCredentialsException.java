@@ -1,4 +1,4 @@
-package dev.kangoo.auth.domain.exceptions;
+package dev.kangoo.auth.exceptions;
 
 public class InvalidCredentialsException extends RuntimeException {
 

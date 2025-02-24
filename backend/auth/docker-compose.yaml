@@ -1,0 +1,15 @@
+services:
+  db:
+    container_name: mysql
+    image: mysql:9.2.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=auth_service
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=Password123!
+      - MYSQL_ROOT_PASSWORD=Password123!
+    volumes:
+      - ./docker/volume_mysql:/var/lib/mysql
+    restart: always

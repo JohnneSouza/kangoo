@@ -1,4 +1,4 @@
-package dev.kangoo.auth.domain;
+package dev.kangoo.auth.domain.model;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

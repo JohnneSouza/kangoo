@@ -1,4 +1,4 @@
-package dev.kangoo.auth.domain;
+package dev.kangoo.auth.domain.request;
 
 public class AuthRequest {
 

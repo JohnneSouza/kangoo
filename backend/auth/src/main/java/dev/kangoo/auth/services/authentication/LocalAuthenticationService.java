@@ -1,8 +1,8 @@
 package dev.kangoo.auth.services.authentication;
 
-import dev.kangoo.auth.domain.AuthRequest;
-import dev.kangoo.auth.domain.AuthResponse;
-import dev.kangoo.auth.domain.User;
+import dev.kangoo.auth.domain.model.AuthUser;
+import dev.kangoo.auth.domain.request.AuthRequest;
+import dev.kangoo.auth.domain.response.AuthResponse;
 import dev.kangoo.auth.services.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +21,7 @@ public class LocalAuthenticationService implements AuthenticationService {
 
     public AuthResponse generateToken(AuthRequest authRequest) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());
-        User principal = (User) this.authenticationManager.authenticate(usernamePassword).getPrincipal();
+        AuthUser principal = (AuthUser) this.authenticationManager.authenticate(usernamePassword).getPrincipal();
 
         return this.tokenService.generateToken(principal);
     }

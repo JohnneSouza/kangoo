@@ -1,7 +1,7 @@
 package dev.kangoo.auth.controller;
 
-import dev.kangoo.auth.domain.AuthRequest;
-import dev.kangoo.auth.domain.AuthResponse;
+import dev.kangoo.auth.domain.request.AuthRequest;
+import dev.kangoo.auth.domain.response.AuthResponse;
 import dev.kangoo.auth.services.authentication.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

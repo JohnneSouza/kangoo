@@ -1,12 +1,11 @@
-package dev.kangoo.auth.domain;
+package dev.kangoo.auth.domain.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-
-public class User implements UserDetails {
+public class AuthUser implements UserDetails {
 
     private String id;
     private String login;

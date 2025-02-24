@@ -1,8 +1,8 @@
 package dev.kangoo.auth.services;
 
-import dev.kangoo.auth.domain.User;
-import dev.kangoo.auth.domain.UserEntity;
-import dev.kangoo.auth.domain.UserRoles;
+import dev.kangoo.auth.domain.model.AuthUser;
+import dev.kangoo.auth.domain.model.UserEntity;
+import dev.kangoo.auth.domain.model.UserRoles;
 import dev.kangoo.auth.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByUsername(String username) {
+    public AuthUser findByUsername(String username) {
         UserEntity userEntity = this.userRepository.findByUsername(username);
-        User user = new User();
-        user.setId(userEntity.getId());
-        user.setUsername(userEntity.getUsername());
-        user.setPassword(userEntity.getPasswordHash());
-        user.setRole(UserRoles.ADMIN);
-        user.setEnabled(userEntity.isEnabled());
-        return user;
+        AuthUser authUser = new AuthUser();
+        authUser.setId(userEntity.getCustomerId());
+        authUser.setUsername(userEntity.getUsername());
+        authUser.setPassword(userEntity.getPasswordHash());
+        authUser.setRole(UserRoles.ADMIN);
+        authUser.setEnabled(userEntity.isEnabled());
+        return authUser;
     }
 }
