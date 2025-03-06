@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class CustomerServiceClient implements CustomerService {
+public class CustomerServiceClient {
 
     private final WebClient webClient;
 
@@ -21,13 +21,16 @@ public class CustomerServiceClient implements CustomerService {
                 .build();;
     }
 
-    @Override
     public CustomerResponse customerSignUp(CustomerRequest customerRequest) {
-        return this.webClient
-                .post()
-                .uri("/customer-management/signup")
-                .retrieve()
-                .bodyToMono(CustomerResponse.class)
-                .block();
+        CustomerResponse customerResponse = new CustomerResponse();
+        customerResponse.setCustomerId(customerRequest.getCustomerId());
+
+        return customerResponse;
+//        return this.webClient
+//                .post()
+//                .uri("/customer-management/signup")
+//                .retrieve()
+//                .bodyToMono(CustomerResponse.class)
+//                .block();
     }
 }

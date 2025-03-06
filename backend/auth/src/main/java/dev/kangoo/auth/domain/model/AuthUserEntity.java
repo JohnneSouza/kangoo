@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class UserEntity {
+public class AuthUserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
