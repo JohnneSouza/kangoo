@@ -9,6 +9,9 @@
 .idea/**
 **/.idea/**
 
+# Docker stuff
+/backend/docker/volume**
+
 # Athentication Stuff
 **/*.key
 **/*.pub
