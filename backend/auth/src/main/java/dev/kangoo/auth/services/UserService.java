@@ -15,19 +15,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public AuthUser findByUsername(String username) {
-        AuthUserEntity authUserEntity = this.userRepository.findByUsername(username);
+    public AuthUser findByUsername(String email) {
+        AuthUserEntity authUserEntity = this.userRepository.findByEmail(email);
         AuthUser authUser = new AuthUser();
         authUser.setId(authUserEntity.getCustomerId());
-        authUser.setUsername(authUserEntity.getUsername());
+        authUser.setUsername(authUserEntity.getEmail());
         authUser.setPassword(authUserEntity.getPasswordHash());
         authUser.setRole(UserRoles.ADMIN);
         authUser.setEnabled(authUserEntity.isEnabled());
         return authUser;
-    }
-
-    public AuthUser save(AuthUser authUser) {
-        AuthUserEntity saved = this.userRepository.save(new AuthUserEntity());
-        return new AuthUser();
     }
 }

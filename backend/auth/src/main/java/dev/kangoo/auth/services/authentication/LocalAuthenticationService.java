@@ -20,9 +20,9 @@ public class LocalAuthenticationService implements AuthenticationService {
     }
 
     public AuthResponse generateToken(AuthRequest authRequest) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());
-        AuthUser principal = (AuthUser) this.authenticationManager.authenticate(usernamePassword).getPrincipal();
+        var usernamePassword = new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword());
+        AuthUser userDetails = (AuthUser) this.authenticationManager.authenticate(usernamePassword).getPrincipal();
 
-        return this.tokenService.generateToken(principal);
+        return this.tokenService.generateToken(userDetails);
     }
 }

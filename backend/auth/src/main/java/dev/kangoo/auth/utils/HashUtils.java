@@ -22,6 +22,7 @@ public abstract class HashUtils {
         }
     }
 
+    // TODO: Include a salt before hashing
     public static String generateHash(String customerId){
         byte[] hashBytes = H_MAC.doFinal(customerId.getBytes());
         return Base64.getEncoder().encodeToString(hashBytes);

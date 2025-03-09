@@ -3,24 +3,33 @@ package dev.kangoo.auth.client;
 import dev.kangoo.auth.domain.model.AuthUserEntity;
 import dev.kangoo.auth.domain.request.CustomerRequest;
 import dev.kangoo.auth.domain.response.CustomerResponse;
+import dev.kangoo.auth.mappers.CustomerMappers;
+import dev.kangoo.auth.publisher.CustomersPublisher;
 import dev.kangoo.auth.repositories.AuthUserRepository;
 import dev.kangoo.auth.utils.HashUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerManagementService implements CustomerService{
+public class CustomerManagementService implements CustomerService {
 
-    private final CustomerServiceClient customerServiceClient;
-    private final AuthUserRepository authUserRepository;
+    private static final Logger log = LogManager.getLogger(CustomerManagementService.class);
+
+    private final CustomersPublisher customersPublisher;
     private final PasswordEncoder passwordEncoder;
+    private final AuthUserRepository authUserRepository;
+    private final CustomerMappers customerMappers;
 
-    public CustomerManagementService(CustomerServiceClient customerServiceClient,
-                                     AuthUserRepository authUserRepository,
-                                     PasswordEncoder passwordEncoder) {
-        this.customerServiceClient = customerServiceClient;
-        this.authUserRepository = authUserRepository;
+    public CustomerManagementService(AuthUserRepository authUserRepository,
+                                     CustomersPublisher customersPublisher,
+                                     PasswordEncoder passwordEncoder,
+                                     CustomerMappers customerMappers) {
+        this.customersPublisher = customersPublisher;
         this.passwordEncoder = passwordEncoder;
+        this.authUserRepository = authUserRepository;
+        this.customerMappers = customerMappers;
     }
 
     @Override
@@ -30,14 +39,14 @@ public class CustomerManagementService implements CustomerService{
         customerRequest.setPassword(encodedPwd);
         customerRequest.setCustomerId(customerId);
 
+        AuthUserEntity entity = this.customerMappers.toEntity(customerRequest);
 
-        AuthUserEntity entity = new AuthUserEntity();
-        entity.setEmail(customerRequest.getEmail());
-        entity.setCustomerId(customerId);
-        entity.setPasswordHash(encodedPwd);
+        AuthUserEntity savedEntity = this.authUserRepository.save(entity);
 
-        this.authUserRepository.save(entity);
+        this.customersPublisher.publishCustomerSignup(customerRequest);
 
-        return this.customerServiceClient.customerSignUp(customerRequest);
+        log.info("Customer signup successful");
+
+        return this.customerMappers.toResponse(savedEntity);
     }
 }
