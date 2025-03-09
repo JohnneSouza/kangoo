@@ -13,6 +13,16 @@ spring:
   rabbitmq:
     password: Password123!
     username: amqp_user
+    vhost: Kangoo_local
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000ms
+          multiplier: 2.0
+          max-attempts: 3
+          max-interval: 10000ms
+          stateless: true
 
 server:
   port: 8081
