@@ -19,7 +19,6 @@ public class UserService {
         AuthUserEntity authUserEntity = this.userRepository.findByEmail(email);
         AuthUser authUser = new AuthUser();
         authUser.setId(authUserEntity.getCustomerId());
-        authUser.setUsername(authUserEntity.getEmail());
         authUser.setPassword(authUserEntity.getPasswordHash());
         authUser.setRole(UserRoles.ADMIN);
         authUser.setEnabled(authUserEntity.isEnabled());

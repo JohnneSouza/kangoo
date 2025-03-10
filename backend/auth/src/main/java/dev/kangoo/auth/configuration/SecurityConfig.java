@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests.requestMatchers(HttpMethod.POST, "/v1/auth/login").permitAll();
                     authorizeRequests.requestMatchers(HttpMethod.POST, "/v1/auth/signup").permitAll();
+                    authorizeRequests.requestMatchers(HttpMethod.GET, "/v1/auth/activation/**").permitAll();
                     authorizeRequests.anyRequest().authenticated();
                 });
         http.addFilterBefore(this.securityFilter, UsernamePasswordAuthenticationFilter.class);

@@ -4,7 +4,7 @@ import dev.kangoo.auth.domain.request.CustomerRequest;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
-import static dev.kangoo.auth.configuration.RabbitConfiguration.ROUTING_KEY;
+import static dev.kangoo.auth.configuration.RabbitConfiguration.CUSTOMER_REGISTRATION;
 
 @Component
 public class CustomersPublisher {
@@ -16,6 +16,6 @@ public class CustomersPublisher {
     }
 
     public void publishCustomerSignup(CustomerRequest customerRequest) {
-        this.rabbitTemplate.convertAndSend(ROUTING_KEY, customerRequest);
+        this.rabbitTemplate.convertAndSend(CUSTOMER_REGISTRATION, customerRequest);
     }
 }

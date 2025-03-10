@@ -1,11 +1,13 @@
 package dev.kangoo.auth.controller;
 
-import dev.kangoo.auth.client.CustomerService;
+import dev.kangoo.auth.services.CustomersService;
 import dev.kangoo.auth.domain.request.AuthRequest;
 import dev.kangoo.auth.domain.request.CustomerRequest;
 import dev.kangoo.auth.domain.response.AuthResponse;
 import dev.kangoo.auth.domain.response.CustomerResponse;
 import dev.kangoo.auth.services.authentication.AuthenticationService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController implements Login {
 
     private final AuthenticationService authenticationService;
-    private final CustomerService customerService;
+    private final CustomersService customersService;
 
-    public LoginController(AuthenticationService authenticationService, CustomerService customerService) {
+    public LoginController(AuthenticationService authenticationService, CustomersService customersService) {
         this.authenticationService = authenticationService;
-        this.customerService = customerService;
+        this.customersService = customersService;
     }
-
 
     @PostMapping("login")
     public AuthResponse login(@RequestBody AuthRequest authRequest) {
@@ -31,7 +32,12 @@ public class LoginController implements Login {
 
     @PostMapping("signup")
     public CustomerResponse signup(@RequestBody CustomerRequest customerRequest) {
-        return this.customerService.customerSignUp(customerRequest);
+        return this.customersService.customerSignUp(customerRequest);
+    }
+
+    @GetMapping("activation/{code}")
+    public void activeCustomerAccount(@PathVariable String code) {
+        this.customersService.activateAccount(code);
     }
 
 }

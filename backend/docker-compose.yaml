@@ -26,3 +26,14 @@ services:
     volumes:
       - ./docker/volume_rabbitmq:/var/lib/rabbitmq
     restart: always
+
+  redis:
+    container_name: redis
+    image: redis:7.4.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/volume_redis:/data
+      - ./docker/redis/user.acl:/user.acl
+    restart: always
+    command: ["redis-server", "--appendonly", "yes", "--aclfile", "/user.acl"]

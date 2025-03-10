@@ -14,7 +14,15 @@ spring:
     password: Password123!
     username: amqp_user
     vhost: Kangoo_local
+  redis:
+      host: redis
+      port: 6379
+      password: Password123!
+      timeout: 5000
 
+logging:
+  level:
+    dev.kangoo: debug
 
 jwt:
   public:

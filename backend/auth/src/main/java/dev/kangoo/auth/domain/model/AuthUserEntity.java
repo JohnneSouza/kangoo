@@ -2,11 +2,20 @@ package dev.kangoo.auth.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.Instant;
 
 @Entity(name = "auth_user")
+@Table(name = "auth_user")
+@EntityListeners(AuditingEntityListener.class)
 public class AuthUserEntity {
 
     @Id
@@ -14,12 +23,16 @@ public class AuthUserEntity {
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long id;
     private String customerId;
-    private String name;
-    private String username;
     private String email;
     private String passwordHash;
     private UserRoles userRoles;
     private boolean enabled;
+
+    @CreatedDate
+    private Instant createdAt;
+
+    @LastModifiedDate
+    private Instant updatedAt;
 
     public Long getId() {
         return id;
@@ -35,22 +48,6 @@ public class AuthUserEntity {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -83,5 +80,21 @@ public class AuthUserEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

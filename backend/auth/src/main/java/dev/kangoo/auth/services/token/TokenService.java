@@ -1,4 +1,4 @@
-package dev.kangoo.auth.services;
+package dev.kangoo.auth.services.token;
 
 import dev.kangoo.auth.domain.response.AuthResponse;
 import org.springframework.security.core.userdetails.UserDetails;
