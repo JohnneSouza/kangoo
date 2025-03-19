@@ -53,7 +53,7 @@ public class CustomersManagementService implements CustomersService {
 
         String activationCode = UUID.randomUUID().toString();
 
-        this.redisTemplate.opsForList().leftPush(activationCode, customerId);
+        this.redisTemplate.opsForValue().set(activationCode, customerId);
 
         log.debug("Activate this account here -> http://localhost:8080/v1/auth/activation/{}", activationCode);
 
@@ -65,10 +65,10 @@ public class CustomersManagementService implements CustomersService {
     @Override
     public void activateAccount(String code) {
         // Retrieve the customerId by the code
-        String customerId = this.redisTemplate.opsForList().getFirst(code);
+        String customerId = this.redisTemplate.opsForValue().getAndDelete(code);
         // If not found return error
         if (customerId == null) throw new RuntimeException("Customer not found");
-        this.redisTemplate.delete(code);
+
         // If found call repository and set enabled: true
         this.authUserRepository.enableUserByCustomerId(customerId);
         log.info("Activate account successful");

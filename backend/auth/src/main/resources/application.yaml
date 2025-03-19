@@ -6,15 +6,20 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     hibernate:
       ddl-auto: update
+  jpa:
+    open-in-view: false
   rabbitmq:
     password: Password123!
     username: amqp_user
     vhost: Kangoo_local
-  redis:
+  data:
+    redis:
+      database: 0
       host: redis
       port: 6379
       password: Password123!
-      timeout: 5000
+      ssl:
+        enabled: false
 
 logging:
   level:

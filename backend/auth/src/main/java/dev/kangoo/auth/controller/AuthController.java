@@ -6,8 +6,6 @@ import dev.kangoo.auth.domain.response.AuthResponse;
 import dev.kangoo.auth.domain.response.CustomerResponse;
 import dev.kangoo.auth.services.CustomersService;
 import dev.kangoo.auth.services.authentication.AuthenticationService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,15 +21,15 @@ public class AuthController implements Auth {
         this.customersService = customersService;
     }
 
-    public AuthResponse login(@RequestBody AuthRequest authRequest) {
+    public AuthResponse login(AuthRequest authRequest) {
         return this.authenticationService.generateToken(authRequest);
     }
 
-    public CustomerResponse signup(@RequestBody CustomerRequest customerRequest) {
+    public CustomerResponse signup(CustomerRequest customerRequest) {
         return this.customersService.customerSignUp(customerRequest);
     }
 
-    public void activeCustomerAccount(@PathVariable String code) {
+    public void activeCustomerAccount(String code) {
         this.customersService.activateAccount(code);
     }
 
