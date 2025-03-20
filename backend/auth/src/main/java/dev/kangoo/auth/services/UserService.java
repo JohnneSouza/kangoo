@@ -1,7 +1,7 @@
 package dev.kangoo.auth.services;
 
 import dev.kangoo.auth.domain.model.AuthUserEntity;
-import dev.kangoo.auth.repositories.AuthUserRepository;
+import dev.kangoo.auth.repositories.auth.AuthUserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -6,10 +6,12 @@ import dev.kangoo.auth.domain.request.CustomerRequest;
 import dev.kangoo.auth.domain.response.CustomerResponse;
 import dev.kangoo.auth.mappers.CustomerMappers;
 import dev.kangoo.auth.publisher.CustomersPublisher;
-import dev.kangoo.auth.repositories.AuthUserRepository;
+import dev.kangoo.auth.repositories.auth.AuthUserRepository;
+import dev.kangoo.auth.services.outbox.SignupOutboxService;
 import dev.kangoo.auth.utils.HashUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.amqp.AmqpException;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,17 +28,19 @@ public class CustomersManagementService implements CustomersService {
     private final StringRedisTemplate redisTemplate;
     private final PasswordEncoder passwordEncoder;
     private final CustomerMappers customerMappers;
+    private final SignupOutboxService signupOutboxService;
 
     public CustomersManagementService(AuthUserRepository authUserRepository,
                                       CustomersPublisher customersPublisher,
                                       StringRedisTemplate redisTemplate,
                                       PasswordEncoder passwordEncoder,
-                                      CustomerMappers customerMappers) {
+                                      CustomerMappers customerMappers, SignupOutboxService signupOutboxService) {
         this.authUserRepository = authUserRepository;
         this.customersPublisher = customersPublisher;
         this.redisTemplate = redisTemplate;
         this.passwordEncoder = passwordEncoder;
         this.customerMappers = customerMappers;
+        this.signupOutboxService = signupOutboxService;
     }
 
     @Override
@@ -51,8 +55,14 @@ public class CustomersManagementService implements CustomersService {
 
         AuthUserEntity savedEntity = this.authUserRepository.save(entity);
 
-        this.customersPublisher.publishCustomerSignup(customerRequest);
+        try {
+            this.customersPublisher.publishCustomerSignup(customerRequest);
+        } catch (AmqpException ex) {
+            log.error(ex);
+            this.signupOutboxService.saveMessage(customerRequest);
+        }
 
+        // TODO: Replace with a custom algorithm based on the customer id.
         String activationCode = UUID.randomUUID().toString();
 
         this.redisTemplate.opsForValue().set(activationCode, customerId);

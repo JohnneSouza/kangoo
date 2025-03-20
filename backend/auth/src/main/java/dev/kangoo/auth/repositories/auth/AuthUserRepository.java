@@ -1,4 +1,4 @@
-package dev.kangoo.auth.repositories;
+package dev.kangoo.auth.repositories.auth;
 
 import dev.kangoo.auth.domain.model.AuthUserEntity;
 import jakarta.transaction.Transactional;
