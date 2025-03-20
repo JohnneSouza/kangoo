@@ -33,15 +33,12 @@ public class SecurityConfig {
 
     private final RSAPublicKey publicKey;
     private final RSAPrivateKey privateKey;
-    private final SecurityFilter securityFilter;
 
     public SecurityConfig(
             @Value("${jwt.public.key}") RSAPublicKey publicKey,
-            @Value("${jwt.private.key}") RSAPrivateKey privateKey,
-            SecurityFilter securityFilter) {
+            @Value("${jwt.private.key}") RSAPrivateKey privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
-        this.securityFilter = securityFilter;
     }
 
     @Bean
@@ -66,7 +63,6 @@ public class SecurityConfig {
                     authorizeRequests.requestMatchers(HttpMethod.GET, "/v1/auth/activation/**").permitAll();
                     authorizeRequests.anyRequest().authenticated();
                 });
-        http.addFilterBefore(this.securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

@@ -1,6 +1,7 @@
 package dev.kangoo.auth.services;
 
 import dev.kangoo.auth.domain.model.AuthUserEntity;
+import dev.kangoo.auth.domain.model.UserRoles;
 import dev.kangoo.auth.domain.request.CustomerRequest;
 import dev.kangoo.auth.domain.response.CustomerResponse;
 import dev.kangoo.auth.mappers.CustomerMappers;
@@ -46,6 +47,7 @@ public class CustomersManagementService implements CustomersService {
         customerRequest.setCustomerId(customerId);
 
         AuthUserEntity entity = this.customerMappers.toEntity(customerRequest);
+        entity.setUserRoles(UserRoles.USER);
 
         AuthUserEntity savedEntity = this.authUserRepository.save(entity);
 
@@ -64,14 +66,11 @@ public class CustomersManagementService implements CustomersService {
 
     @Override
     public void activateAccount(String code) {
-        // Retrieve the customerId by the code
         String customerId = this.redisTemplate.opsForValue().getAndDelete(code);
-        // If not found return error
         if (customerId == null) throw new RuntimeException("Customer not found");
 
-        // If found call repository and set enabled: true
         this.authUserRepository.enableUserByCustomerId(customerId);
-        log.info("Activate account successful");
+        log.info("CustomerID {} activated with success.", customerId);
     }
 
 

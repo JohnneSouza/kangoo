@@ -53,7 +53,7 @@ public class AuthUser implements UserDetails {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
