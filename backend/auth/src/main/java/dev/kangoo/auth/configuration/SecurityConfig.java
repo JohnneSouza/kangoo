@@ -31,6 +31,17 @@ import java.security.interfaces.RSAPublicKey;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final String[] OPEN_API_URLS = {
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/v3/api-docs/**",
+            "/v3/api-docs",
+            "/swagger-resources/**",
+            "/swagger-resources/configuration/**",
+            "/webjars/**",
+            "/favicon.ico"
+    };
+
     private final RSAPublicKey publicKey;
     private final RSAPrivateKey privateKey;
 
@@ -58,6 +69,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests -> {
+                    authorizeRequests.requestMatchers(OPEN_API_URLS).permitAll();
                     authorizeRequests.requestMatchers(HttpMethod.POST, "/v1/auth/login").permitAll();
                     authorizeRequests.requestMatchers(HttpMethod.POST, "/v1/auth/signup").permitAll();
                     authorizeRequests.requestMatchers(HttpMethod.GET, "/v1/auth/activation/**").permitAll();

@@ -1,12 +1,25 @@
 package dev.kangoo.auth.domain.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+
 public class CustomerRequest {
 
+    @NotBlank(message = "The field 'email' must not be empty.")
+    @Schema(description = "Customer's email.", example = "email@provider.io")
     private String email;
+
+    @NotBlank(message = "The field 'password' must not be empty.")
+    @Schema(description = "Customer's password.", example = "Password123!")
     private String password;
-    private String customerId;
+
+    @Schema(description = "Customer's phone.", example = "12345678")
     private String phone;
+
+    @Schema(description = "Customer's first name.", example = "John")
     private String firstName;
+
+    @Schema(description = "Customer's first name.", example = "Doe")
     private String lastName;
 
     public String getEmail() {
@@ -23,14 +36,6 @@ public class CustomerRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public String getPhone() {
