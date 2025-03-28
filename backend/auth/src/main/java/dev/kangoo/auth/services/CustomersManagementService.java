@@ -48,7 +48,6 @@ public class CustomersManagementService implements CustomersService {
         String encodedPwd = this.passwordEncoder.encode(customerRequest.getPassword());
         String customerId = HashUtils.generateHash(customerRequest.getEmail());
         customerRequest.setPassword(encodedPwd);
-        customerRequest.setCustomerId(customerId);
 
         AuthUserEntity entity = this.customerMappers.toEntity(customerRequest);
         entity.setUserRoles(UserRoles.USER);
