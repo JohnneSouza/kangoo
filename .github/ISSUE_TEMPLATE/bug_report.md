@@ -1,42 +1,53 @@
+---
+name: "🐛 Bug Report"
+about: Report a problem or unexpected behavior
+title: "fix: "
+labels: [bug]
+assignees: ""
+---
+
 ## Description
 
-<!-- Briefly describe what this pull request does -->
-<!-- Example: Adds user registration endpoint and updates validation logic. -->
+<!-- Clearly describe the bug or issue -->
 
 ---
 
-## Type of Change
+## Steps to Reproduce
 
-<!-- Select one (required for versioning automation) -->
-
-- [ ] feat: New feature
-- [ ] fix: Bug fix
-- [ ] docs: Documentation update
-- [ ] test: Add or update tests
-- [ ] refactor: Code improvement without functional change
-- [ ] chore: Build, dependency, or configuration update
-- [ ] perf: Performance optimization
-- [ ] ci: Continuous integration or workflow changes
+1. Go to '...'
+2. Click on '...'
+3. Scroll down to '...'
+4. See error
 
 ---
 
-## Related Issue
+## Expected Behavior
 
-<!-- Link to the related issue or task -->
-<!-- Example: Closes #42 -->
-Closes #
+<!-- Describe what you expected to happen -->
 
 ---
 
-## Checklist
+## Actual Behavior
 
-- [ ] My code follows the project’s style and guidelines
-- [ ] I have added or updated tests if needed
-- [ ] All tests pass locally
-- [ ] I have updated documentation if needed
+<!-- Describe what actually happened -->
+
+---
+
+## Environment
+
+- OS: [e.g. Ubuntu 22.04, Windows 11]
+- Java version: [e.g. 17]
+- Build tool: [Gradle / Maven]
+- App version or commit: [e.g. v1.2.3 or a1b2c3d]
+
+---
+
+## Logs or Screenshots (optional)
+
+<!-- Paste relevant logs or attach screenshots to help explain the problem -->
 
 ---
 
 ## Additional Notes (optional)
 
-<!-- Add screenshots, logs, or extra context to help reviewers -->
+<!-- Add context, references, or related issues here -->
