@@ -1,0 +1,47 @@
+name: Auth Service CI / Build
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "backend/auth-service/**"
+      - ".github/workflows/auth-service-ci.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "backend/auth-service/**"
+      - ".github/workflows/auth-service-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build & Test (auth-service, Maven, Java 25)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/auth-service
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25 and Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: 'maven'
+
+      - name: Build and run tests
+        run: mvn -B clean verify
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auth-service-test-reports
+          path: |
+            backend/auth-service/target/surefire-reports
+            backend/auth-service/target/failsafe-reports
