@@ -4,12 +4,12 @@ on:
   pull_request:
     branches: ["main"]
     paths:
-      - "backend/auth-service/**"
+      - "backend/auth/**"
       - ".github/workflows/auth-service-ci.yml"
   push:
     branches: ["main"]
     paths:
-      - "backend/auth-service/**"
+      - "backend/auth/**"
       - ".github/workflows/auth-service-ci.yml"
 
 permissions:
@@ -17,11 +17,11 @@ permissions:
 
 jobs:
   build:
-    name: Build & Test (auth-service, Maven, Java 25)
+    name: Auth Service CI / Build
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend/auth-service
+        working-directory: backend/auth
 
     steps:
       - name: Checkout repository
@@ -41,7 +41,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: auth-service-test-reports
+          name: auth-test-reports
           path: |
-            backend/auth-service/target/surefire-reports
-            backend/auth-service/target/failsafe-reports
+            backend/auth/target/surefire-reports
+            backend/auth/target/failsafe-reports
