@@ -1,0 +1,9 @@
+# IDE Files
+**/.idea/
+.idea
+
+# Target Folder
+**/target
+
+# Sensitive Files
+**/secrets.yaml
