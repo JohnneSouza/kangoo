@@ -1,4 +1,4 @@
-package kangoo.com.auth;
+package dev.kangoo.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

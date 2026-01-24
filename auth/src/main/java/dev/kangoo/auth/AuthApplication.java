@@ -1,4 +1,4 @@
-package kangoo.com.auth;
+package dev.kangoo.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
