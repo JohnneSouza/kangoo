@@ -1,11 +1,21 @@
 package dev.kangoo.auth.domain.user;
 
-public record Password(String value) {
+public final class Password {
 
-    public Password {
-        if (value == null || value.isBlank()) {
-            throw new NullPointerException("Password cannot be null");
-        }
+    private final String hashedPassword;
+
+    private Password(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
+    public static Password fromHashed(String hashed) {
+        if (hashed == null) {
+            throw new IllegalArgumentException("Password cannot be null");
+        }
+        return new Password(hashed);
+    }
+
+    public String getValue(){
+        return this.hashedPassword;
+    }
 }

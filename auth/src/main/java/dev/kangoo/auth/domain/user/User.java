@@ -1,21 +1,19 @@
 package dev.kangoo.auth.domain.user;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class User {
 
-    private final CustomerId customerId;
-    private final Email email;
-    private final Name name;
-    private final Password password;
-    private final Phone phone;
+    private CustomerId customerId;
+    private Email email;
+    private Password password;
 
-    public User(CustomerId customerId, Email email, Name name, Password password, Phone phone) {
+    public User(CustomerId customerId, Email email, Password password) {
         this.customerId = customerId;
         this.email = email;
-        this.name = name;
         this.password = password;
-        this.phone = phone;
     }
 }

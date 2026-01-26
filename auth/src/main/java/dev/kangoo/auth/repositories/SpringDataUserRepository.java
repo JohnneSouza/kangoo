@@ -1,4 +1,4 @@
-package dev.kangoo.auth.adapter.persistence;
+package dev.kangoo.auth.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

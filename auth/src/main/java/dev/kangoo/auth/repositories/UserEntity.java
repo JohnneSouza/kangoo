@@ -1,5 +1,6 @@
-package dev.kangoo.auth.adapter.persistence;
+package dev.kangoo.auth.repositories;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,11 +17,13 @@ public class UserEntity {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String customerId;
-    private String firstName;
-    private String lastName;
+
+    @Column(nullable = false, unique = true)
     private String email;
-    private String passwordHash;
-    private String phone;
+
+    private String password;
 
 }

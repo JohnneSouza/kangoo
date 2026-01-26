@@ -1,4 +1,4 @@
-package dev.kangoo.auth.application.security;
+package dev.kangoo.auth.configurations.security;
 
 public interface PasswordEncoder {
 
