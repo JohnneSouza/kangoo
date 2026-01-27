@@ -1,14 +1,15 @@
 package dev.kangoo.auth.services;
 
-import dev.kangoo.auth.configurations.security.PasswordEncoder;
 import dev.kangoo.auth.controllers.dto.UserRegistrationRequest;
 import dev.kangoo.auth.controllers.dto.UserRegistrationResponse;
+import dev.kangoo.auth.domain.user.Authority;
 import dev.kangoo.auth.domain.user.CustomerId;
 import dev.kangoo.auth.domain.user.Email;
 import dev.kangoo.auth.domain.user.Password;
 import dev.kangoo.auth.domain.user.User;
 import dev.kangoo.auth.mappers.UserMapper;
 import dev.kangoo.auth.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,11 +34,10 @@ public class UserRegistrationService {
             throw new IllegalStateException("User already exists");
 
         CustomerId customerId = CustomerId.generate();
-        Password password = Password.fromHashed(
-                this.passwordEncoder.hash(request.getPassword())
-        );
+        Password password = Password.fromHashed(this.passwordEncoder.encode(request.getPassword()));
+        Authority authority = Authority.roleUser();
 
-        User user = new User(customerId, email, password);
+        User user = new User(customerId, email, password, authority);
 
         //TODO: In the future, create a method here to send to the Customer-Service Message Broker
 

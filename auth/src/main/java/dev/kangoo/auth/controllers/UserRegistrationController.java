@@ -6,7 +6,7 @@ import dev.kangoo.auth.services.UserRegistrationService;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserRegistrationController implements UserRegistration {
+public class UserRegistrationController implements UserRegistrationAPI {
 
     private final UserRegistrationService userRegistrationService;
 

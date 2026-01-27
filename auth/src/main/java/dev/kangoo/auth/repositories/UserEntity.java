@@ -26,4 +26,6 @@ public class UserEntity {
 
     private String password;
 
+    private String authority;
+
 }

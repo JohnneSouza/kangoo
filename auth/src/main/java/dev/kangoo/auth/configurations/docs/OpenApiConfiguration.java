@@ -24,5 +24,5 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT"
 )
 @Configuration
-public class OpenApiConfig {
+public class OpenApiConfiguration {
 }

@@ -16,12 +16,14 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "customerId", expression = "java(user.getCustomerId().value())")
     @Mapping(target = "email", expression = "java(user.getEmail().value())")
-    @Mapping(target = "password", expression = "java(user.getPassword().getValue())")
+    @Mapping(target = "password", expression = "java(user.getPassword().value())")
+    @Mapping(target = "authority", expression = "java(user.getAuthority().value())")
     UserEntity toEntity(User user);
 
     @Mapping(target = "customerId", expression = "java(new CustomerId(entity.getCustomerId()))")
     @Mapping(target = "email", expression = "java(new Email(entity.getEmail()))")
     @Mapping(target = "password", expression = "java(Password.fromHashed(entity.getPassword()))")
+    @Mapping(target = "authority", expression = "java(Authority.roleUser())")
     User toUser(UserEntity entity);
 
 }

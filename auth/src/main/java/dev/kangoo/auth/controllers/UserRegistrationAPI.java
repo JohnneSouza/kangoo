@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
         value = "/v1/auth",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
-public interface UserRegistration {
+public interface UserRegistrationAPI {
 
     @Operation(
             summary = "Register a new user",

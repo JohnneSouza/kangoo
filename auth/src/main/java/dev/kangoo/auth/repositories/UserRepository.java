@@ -16,6 +16,10 @@ public class UserRepository {
         this.mapper = mapper;
     }
 
+    public User findByEmail(Email email) {
+        return this.mapper.toUser(this.springDataUserRepository.findByEmail(email.value()));
+    }
+
     public boolean existsByEmail(Email email) {
         return this.springDataUserRepository.existsByEmail(email.value());
     }
