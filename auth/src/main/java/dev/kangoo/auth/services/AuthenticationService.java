@@ -4,6 +4,7 @@ import dev.kangoo.auth.controllers.dto.AuthenticationRequest;
 import dev.kangoo.auth.controllers.dto.AuthenticationResponse;
 import dev.kangoo.auth.domain.user.Email;
 import dev.kangoo.auth.domain.user.User;
+import dev.kangoo.auth.model.user.SecurityUser;
 import dev.kangoo.auth.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,10 +33,9 @@ public class AuthenticationService {
                 )
         );
 
-        if (authentication.isAuthenticated()){
-            User user = this.userRepository.findByEmail(new Email(request.getEmail()));
-            return this.tokenProvider.generateToken(user);
-        }
+        if (authentication.isAuthenticated())
+            return this.tokenProvider.generateToken(((SecurityUser) authentication.getPrincipal()).user());
+
         return null;
     }
 }
