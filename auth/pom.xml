@@ -13,7 +13,7 @@
     <groupId>kangoo.com</groupId>
 	<artifactId>auth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>auth</name>
+	<name>Auth Service</name>
 
 	<description>Kango Auth Service</description>
 
