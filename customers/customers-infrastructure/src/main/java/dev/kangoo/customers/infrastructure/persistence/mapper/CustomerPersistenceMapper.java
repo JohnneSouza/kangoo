@@ -9,4 +9,6 @@ public interface CustomerPersistenceMapper {
 
     CustomerEntity toEntity(Customer customer);
 
+    Customer toDomain(CustomerEntity customerEntity);
+
 }

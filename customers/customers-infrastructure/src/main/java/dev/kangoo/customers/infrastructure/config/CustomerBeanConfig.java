@@ -1,7 +1,9 @@
 package dev.kangoo.customers.infrastructure.config;
 
 import dev.kangoo.customers.application.service.CreateCustomerService;
+import dev.kangoo.customers.application.service.GetCustomerService;
 import dev.kangoo.customers.application.usecase.CreateCustomerUseCase;
+import dev.kangoo.customers.application.usecase.GetCustomerUseCase;
 import dev.kangoo.customers.domain.repository.CustomerRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,5 +16,10 @@ public class CustomerBeanConfig {
     @Transactional
     CreateCustomerUseCase createCustomerUseCase(CustomerRepository customerRepository) {
         return new CreateCustomerService(customerRepository);
+    }
+
+    @Bean
+    GetCustomerUseCase getCustomerUseCase(CustomerRepository customerRepository) {
+        return new GetCustomerService(customerRepository);
     }
 }
