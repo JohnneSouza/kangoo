@@ -1,4 +1,4 @@
-package dev.kangoo.customers.domain.models;
+package dev.kangoo.customers.domain.model;
 
 public class Customer {
 

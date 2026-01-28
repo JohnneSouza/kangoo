@@ -1,6 +1,6 @@
-package dev.kangoo.customers.domain.repositories;
+package dev.kangoo.customers.domain.repository;
 
-import dev.kangoo.customers.domain.models.Customer;
+import dev.kangoo.customers.domain.model.Customer;
 
 public interface CustomerRepository {
 

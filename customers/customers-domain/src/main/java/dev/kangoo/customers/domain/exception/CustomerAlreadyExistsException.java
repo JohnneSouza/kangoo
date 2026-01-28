@@ -1,4 +1,4 @@
-package dev.kangoo.customers.domain.exceptions;
+package dev.kangoo.customers.domain.exception;
 
 public class CustomerAlreadyExistsException extends RuntimeException {
 

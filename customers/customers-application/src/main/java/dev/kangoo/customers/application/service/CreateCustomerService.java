@@ -2,9 +2,9 @@ package dev.kangoo.customers.application.service;
 
 import dev.kangoo.customers.application.usecase.CreateCustomerCommand;
 import dev.kangoo.customers.application.usecase.CreateCustomerUseCase;
-import dev.kangoo.customers.domain.exceptions.CustomerAlreadyExistsException;
-import dev.kangoo.customers.domain.models.Customer;
-import dev.kangoo.customers.domain.repositories.CustomerRepository;
+import dev.kangoo.customers.domain.exception.CustomerAlreadyExistsException;
+import dev.kangoo.customers.domain.model.Customer;
+import dev.kangoo.customers.domain.repository.CustomerRepository;
 
 public class CreateCustomerService implements CreateCustomerUseCase {
 
@@ -16,7 +16,7 @@ public class CreateCustomerService implements CreateCustomerUseCase {
 
     @Override
     public void execute(CreateCustomerCommand command) {
-        if (customerRepository.existsByCustomerId(command.customerId())) {
+        if (this.customerRepository.existsByCustomerId(command.customerId())) {
             throw new CustomerAlreadyExistsException(command.customerId());
         }
 
