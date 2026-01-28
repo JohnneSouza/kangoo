@@ -12,6 +12,10 @@
     <artifactId>customers-infrastructure</artifactId>
     <name>Customers Infrastructure Layer</name>
 
+    <properties>
+        <java.version>25</java.version>
+    </properties>
+
     <dependencies>
         <!-- Internal modules -->
         <dependency>
@@ -50,6 +54,11 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
         <!-- Observability / Docs -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -70,6 +79,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>4.1.0-M1</version>
             </plugin>
         </plugins>
     </build>

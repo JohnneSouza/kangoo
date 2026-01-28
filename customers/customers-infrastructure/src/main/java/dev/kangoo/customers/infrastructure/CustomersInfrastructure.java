@@ -3,11 +3,12 @@ package dev.kangoo.customers.infrastructure;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class CustomersApplication {
+
+@SpringBootApplication(scanBasePackages = "dev.kangoo.customers")
+public class CustomersInfrastructure {
 
     public static void main(String[] args) {
-        SpringApplication.run(CustomersApplication.class, args);
+        SpringApplication.run(CustomersInfrastructure.class, args);
     }
 
 }
