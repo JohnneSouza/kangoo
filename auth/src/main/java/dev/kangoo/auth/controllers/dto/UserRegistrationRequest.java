@@ -28,8 +28,6 @@ public final class UserRegistrationRequest {
     private String phone;
 
     @NotBlank(message = "Password is required")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
-            message = "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character")
     @Schema(description = "User's password", example = "StrongP@ssw0rd")
     private String password;
 

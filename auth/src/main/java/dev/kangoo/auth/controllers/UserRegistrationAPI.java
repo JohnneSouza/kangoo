@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,6 @@ public interface UserRegistrationAPI {
     })
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    UserRegistrationResponse register(@RequestBody UserRegistrationRequest request);
+    UserRegistrationResponse register(@RequestBody @Valid UserRegistrationRequest request);
 
 }
