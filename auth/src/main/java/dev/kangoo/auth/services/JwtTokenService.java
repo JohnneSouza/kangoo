@@ -23,10 +23,10 @@ public class JwtTokenService implements TokenProvider {
         Date expiration = Date.from(now.plus(this.config.expiration()));
 
         String token = Jwts.builder()
-                .subject(user.getEmail().value())
+                .subject(user.getCustomerId().value())
                 .issuedAt(Date.from(now))
                 .expiration(expiration)
-                .claim("uid", user.getCustomerId().value())
+                .claim("email", user.getEmail().value())
                 .signWith(this.config.privateKey(), Jwts.SIG.RS256)
                 .compact();
 
