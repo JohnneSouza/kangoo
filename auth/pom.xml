@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -5,12 +6,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.kangoo</groupId>
-	<artifactId>auth</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <parent>
+        <groupId>dev.kangoo</groupId>
+        <artifactId>kangoo-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>auth</artifactId>
     <packaging>pom</packaging>
 
-	<name>Auth Service</name>
+    <name>Auth Service</name>
 
     <modules>
         <module>auth-domain</module>
@@ -18,34 +23,5 @@
         <module>auth-adapter</module>
         <module>auth-infrastructure</module>
     </modules>
-
-    <properties>
-        <java.version>25</java.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>4.0.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.1</version>
-                <configuration>
-                    <release>${java.version}</release>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
