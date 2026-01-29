@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.kangoo</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <parent>
+        <groupId>dev.kangoo</groupId>
+        <artifactId>auth</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>auth-application</artifactId>
+
+    <name>Auth Application Layer</name>
+
     <dependencies>
+        <!-- Internal Modules -->
         <dependency>
             <groupId>dev.kangoo</groupId>
             <artifactId>auth-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>25</source>
-                    <target>25</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <artifactId>auth-application</artifactId>
-    <name>Auth Application Layer</name>
 
 </project>
