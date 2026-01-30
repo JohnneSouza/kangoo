@@ -1,5 +1,6 @@
 package dev.kangoo.auth.infrastructure.config;
 
+import dev.kangoo.auth.application.port.CustomerRegistrationPublisher;
 import dev.kangoo.auth.application.port.PasswordEncoder;
 import dev.kangoo.auth.application.port.TokenIssuer;
 import dev.kangoo.auth.application.port.UserAuthenticator;
@@ -23,7 +24,8 @@ public class UserBeanConfig {
 
     @Bean
     @Transactional
-    public UserRegistrationUseCase userRegistrationUseCase(UserRepository userRepository, PasswordEncoder passwordEncoder){
-        return new UserRegistrationService(userRepository, passwordEncoder);
+    public UserRegistrationUseCase userRegistrationUseCase(UserRepository userRepository,
+                                                           PasswordEncoder passwordEncoder, CustomerRegistrationPublisher publisher){
+        return new UserRegistrationService(userRepository, passwordEncoder, publisher);
     }
 }

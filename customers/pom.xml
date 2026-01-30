@@ -10,7 +10,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Customers Service</name>
+	<name>Customer Service</name>
 
 	<modules>
 		<module>customers-domain</module>

@@ -27,4 +27,4 @@ spring:
 
 messaging:
   customer:
-    queue: customers.create
+    queue: customer.register
