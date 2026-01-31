@@ -1,6 +1,7 @@
 package dev.kangoo.auth.infrastructure.security;
 
 import dev.kangoo.auth.application.port.PasswordEncoder;
+import dev.kangoo.auth.domain.model.user.Password;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,7 +14,7 @@ public class BCryptPasswordEncoder implements PasswordEncoder {
     }
 
     @Override
-    public String encode(String password) {
-        return this.passwordEncoder.encode(password);
+    public Password encode(String password) {
+        return Password.fromHashed(this.passwordEncoder.encode(password));
     }
 }

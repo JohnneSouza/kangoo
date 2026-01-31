@@ -3,6 +3,7 @@ package dev.kangoo.auth.application.service;
 import dev.kangoo.auth.application.event.RegisterCustomerEvent;
 import dev.kangoo.auth.application.port.PasswordEncoder;
 import dev.kangoo.auth.application.port.CustomerRegistrationPublisher;
+import dev.kangoo.auth.application.port.UserActivationNotificationSender;
 import dev.kangoo.auth.application.usecase.UserRegistrationCommand;
 import dev.kangoo.auth.application.usecase.UserRegistrationUseCase;
 import dev.kangoo.auth.application.view.UserRegistrationView;
@@ -19,12 +20,14 @@ public class UserRegistrationService implements UserRegistrationUseCase {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomerRegistrationPublisher customerRegistrationPublisher;
+    private final UserActivationNotificationSender notificationSender;
 
     public UserRegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                                   CustomerRegistrationPublisher customerRegistrationPublisher) {
+                                   CustomerRegistrationPublisher customerRegistrationPublisher, UserActivationNotificationSender notificationSender) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.customerRegistrationPublisher = customerRegistrationPublisher;
+        this.notificationSender = notificationSender;
     }
 
     @Override
@@ -32,20 +35,19 @@ public class UserRegistrationService implements UserRegistrationUseCase {
         if (this.userRepository.existsByEmail(command.email()))
             throw new UserAlreadyExistsException(command.email());
 
-        String hashedPassword = this.passwordEncoder.encode(command.password());
-
+        Password password = this.passwordEncoder.encode(command.password());
         CustomerId customerId = CustomerId.generate();
         Email email = new Email(command.email());
-        Password password = Password.fromHashed(hashedPassword);
         Authority authority = Authority.roleUser();
 
-        var user = new User(customerId, email, password, authority);
+        var user = User.register(customerId, email, password, authority);
         this.userRepository.save(user);
+        this.notificationSender.send(email);
 
         this.customerRegistrationPublisher
                 .publish(new RegisterCustomerEvent(
-                        customerId.value(),
-                        email.value(),
+                        user.getCustomerId().value(),
+                        user.getEmail().value(),
                         command.firstName(),
                         command.lastName(),
                         command.phone()));

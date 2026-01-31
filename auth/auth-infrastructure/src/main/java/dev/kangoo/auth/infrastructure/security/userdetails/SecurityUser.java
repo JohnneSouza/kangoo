@@ -25,4 +25,7 @@ public record SecurityUser(User user) implements UserDetails {
         return this.user.getEmail().value();
     }
 
+    @Override
+    public boolean isEnabled() { return this.user.getStatus().isEnabled(); }
+
 }

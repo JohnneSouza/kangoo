@@ -9,6 +9,7 @@ import dev.kangoo.auth.application.service.UserRegistrationService;
 import dev.kangoo.auth.application.usecase.AuthenticateUserUseCase;
 import dev.kangoo.auth.application.usecase.UserRegistrationUseCase;
 import dev.kangoo.auth.domain.repository.UserRepository;
+import dev.kangoo.auth.infrastructure.mail.MailUserActivationSender;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,9 @@ public class UserBeanConfig {
     @Bean
     @Transactional
     public UserRegistrationUseCase userRegistrationUseCase(UserRepository userRepository,
-                                                           PasswordEncoder passwordEncoder, CustomerRegistrationPublisher publisher){
-        return new UserRegistrationService(userRepository, passwordEncoder, publisher);
+                                                           PasswordEncoder passwordEncoder,
+                                                           CustomerRegistrationPublisher publisher,
+                                                           MailUserActivationSender mailUserActivationSender){
+        return new UserRegistrationService(userRepository, passwordEncoder, publisher, mailUserActivationSender);
     }
 }

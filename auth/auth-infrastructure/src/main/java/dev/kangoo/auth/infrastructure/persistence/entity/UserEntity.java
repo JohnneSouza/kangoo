@@ -28,4 +28,6 @@ public class UserEntity {
 
     private String authority;
 
+    private boolean enabled;
+
 }
