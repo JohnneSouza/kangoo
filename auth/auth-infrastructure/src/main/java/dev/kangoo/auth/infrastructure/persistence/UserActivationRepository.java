@@ -23,4 +23,10 @@ public class UserActivationRepository implements ActivationTokenRepository {
         ActivationTokenEntity entity = this.mapper.toEntity(activationToken);
         this.activationRepository.save(entity);
     }
+
+    @Override
+    public ActivationToken findByToken(String token) {
+        var activationToken = this.activationRepository.findByToken(token);
+        return this.mapper.toDomain(activationToken);
+    }
 }

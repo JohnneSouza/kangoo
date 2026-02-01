@@ -48,7 +48,7 @@ public class UserRegistrationService implements UserRegistrationUseCase {
 
         var user = User.register(customerId, email, password, authority);
         this.userRepository.save(user);
-        this.notificationSender.send(email, activationToken.getToken());
+        this.notificationSender.send(email, activationToken.token());
         this.activationTokenRepository.save(activationToken);
 
         this.customerRegistrationPublisher

@@ -28,4 +28,9 @@ public class UserRepositoryImpl implements UserRepository {
         UserEntity entity = this.mapper.toEntity(user);
         this.repository.save(entity);
     }
+
+    @Override
+    public int activateUserByCustomerId(String customerId) {
+        return this.repository.activateUser(customerId);
+    }
 }

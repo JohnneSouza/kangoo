@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpringDataActivationRepository extends JpaRepository<ActivationTokenEntity, Long> {
 
+    ActivationTokenEntity findByToken(String token);
+
 }
