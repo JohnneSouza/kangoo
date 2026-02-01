@@ -3,6 +3,33 @@ services:
     image: axllent/mailpit
     container_name: mailpit
     ports:
-      - "8025:8025" # Web UI (http://localhost:8025)
-      - "1025:1025" # SMTP server
+      - "8025:8025"
+      - "1025:1025"
     restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  postgres:
+    image: postgres:18.0-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -35,7 +35,7 @@ public class SpringAuthenticationService implements UserAuthenticator {
             return principal.user();
 
         } catch (AuthenticationException ex) {
-            log.warn("Authentication failed for user: {}", email);
+            log.warn("Authentication failed for user: {} - {}", email, ex.getMessage());
             throw new InvalidCredentialsException("Invalid email or password");
         }
     }

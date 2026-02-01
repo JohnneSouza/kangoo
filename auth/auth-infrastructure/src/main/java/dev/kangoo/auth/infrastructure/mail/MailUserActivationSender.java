@@ -2,6 +2,7 @@ package dev.kangoo.auth.infrastructure.mail;
 
 import dev.kangoo.auth.application.port.UserActivationNotificationSender;
 import dev.kangoo.auth.domain.model.user.Email;
+import dev.kangoo.auth.domain.model.user.TokenValue;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,7 @@ public class MailUserActivationSender implements UserActivationNotificationSende
     }
 
     @Override
-    public void send(Email email) {
+    public void send(Email email, TokenValue token) {
         try {
             MimeMessage mimeMessage = this.mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(
@@ -38,7 +39,7 @@ public class MailUserActivationSender implements UserActivationNotificationSende
             );
 
             Context context = new Context();
-            String activationUrl = "https://kangoo.dev/activate?token=" + email.value(); //
+            String activationUrl = "http://localhost:8080/v1/auth/activate?token=" + token.value(); //
             context.setVariable("activationUrl", activationUrl);
 
             String htmlContent = this.templateEngine.process("activation-email", context);
