@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public interface AuthAPI {
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    AuthenticationView authenticate(@RequestBody @Valid AuthenticationRequest request);
+    ResponseEntity<Void> authenticate(@RequestBody @Valid AuthenticationRequest request);
 
     @GetMapping(value = "/activate")
     @ResponseStatus(HttpStatus.FOUND)

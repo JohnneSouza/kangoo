@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
         produces = MediaType.APPLICATION_JSON_VALUE)
 public interface CustomerAPI {
 
-    @GetMapping
+    @GetMapping("/me")
     CustomerView getCustomerInfo(@AuthenticationPrincipal Jwt jwt);
 
 }

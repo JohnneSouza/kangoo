@@ -16,7 +16,11 @@ import dev.kangoo.auth.domain.user.CustomerId;
 import dev.kangoo.auth.domain.user.Email;
 import dev.kangoo.auth.domain.user.Password;
 import dev.kangoo.auth.domain.user.User;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class UserRegistrationService implements UserRegistrationUseCase {
 
     private final UserRepository userRepository;

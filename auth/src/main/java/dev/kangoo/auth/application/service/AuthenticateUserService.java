@@ -5,7 +5,9 @@ import dev.kangoo.auth.application.port.UserAuthenticator;
 import dev.kangoo.auth.application.usecase.AuthenticateUserCommand;
 import dev.kangoo.auth.application.usecase.AuthenticateUserUseCase;
 import dev.kangoo.auth.application.view.AuthenticationView;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthenticateUserService implements AuthenticateUserUseCase {
 
     private final UserAuthenticator userAuthenticator;
