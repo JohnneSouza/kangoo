@@ -8,3 +8,6 @@
 # Sensitive Files
 **/secrets.yaml
 **/*.pem
+
+# Node Files
+**/node_modules
