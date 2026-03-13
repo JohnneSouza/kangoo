@@ -52,7 +52,9 @@ function AppContent() {
   // Check for protected routes and redirect if not authenticated
   useEffect(() => {
     const protectedPaths = ['/orders', '/profile', '/favorites'];
-    const isProtectedPath = protectedPaths.some(path => location.pathname === path);
+    const isProtectedPath =
+      protectedPaths.some(path => location.pathname === path) ||
+      location.pathname.startsWith('/orders/');
     
     if (isProtectedPath && !isAuthenticated) {
       setIsAuthModalOpen(true);
@@ -138,7 +140,11 @@ function AppContent() {
         />
         <Route
           path="/orders/:orderId"
-          element={<OrderDetailPage />}
+          element={
+            <ProtectedRoute>
+              <OrderDetailPage />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/profile"
