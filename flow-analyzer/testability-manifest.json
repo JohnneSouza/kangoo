@@ -1,0 +1,698 @@
+{
+  "targetProject": "/home/johnnes/Projects/kangoo/frontend",
+  "routes": [
+    {
+      "path": "/",
+      "guards": [],
+      "stores": [],
+      "sourceFile": "src/App.tsx",
+      "line": 106,
+      "element": "element={\n            <HomePage\n              searchQuery={searchQuery}\n              onQuickView={setQuickViewProduct}\n              selectedCategory={selectedCategory}\n              selectedSubcategory={selectedSubcategory}\n              showOnSale={showOnSale}\n              onClearFilters={() => {\n                setSelectedCategory(null);\n                setSelectedSubcategory(null);\n                setShowOnSale(false);\n              }}\n            />\n          }",
+      "component": "HomePage"
+    },
+    {
+      "path": "/activation-success",
+      "guards": [],
+      "stores": [],
+      "sourceFile": "src/App.tsx",
+      "line": 123,
+      "element": "element={<ActivationSuccessPage />}",
+      "component": "ActivationSuccessPage"
+    },
+    {
+      "path": "/product/:productId/reviews",
+      "guards": [],
+      "stores": [],
+      "sourceFile": "src/App.tsx",
+      "line": 127,
+      "element": "element={<ProductReviewsPage />}",
+      "component": "ProductReviewsPage"
+    },
+    {
+      "path": "/orders",
+      "guards": [
+        "ProtectedRoute"
+      ],
+      "stores": [
+        "auth-storage"
+      ],
+      "sourceFile": "src/App.tsx",
+      "line": 131,
+      "element": "element={\n            <ProtectedRoute>\n              <OrdersPage />\n            </ProtectedRoute>\n          }",
+      "component": "OrdersPage"
+    },
+    {
+      "path": "/orders/:orderId",
+      "guards": [],
+      "stores": [],
+      "sourceFile": "src/App.tsx",
+      "line": 139,
+      "element": "element={<OrderDetailPage />}",
+      "component": "OrderDetailPage"
+    },
+    {
+      "path": "/profile",
+      "guards": [
+        "ProtectedRoute"
+      ],
+      "stores": [
+        "auth-storage"
+      ],
+      "sourceFile": "src/App.tsx",
+      "line": 143,
+      "element": "element={\n            <ProtectedRoute>\n              <ProfilePage />\n            </ProtectedRoute>\n          }",
+      "component": "ProfilePage"
+    },
+    {
+      "path": "/favorites",
+      "guards": [
+        "ProtectedRoute"
+      ],
+      "stores": [
+        "auth-storage"
+      ],
+      "sourceFile": "src/App.tsx",
+      "line": 151,
+      "element": "element={\n            <ProtectedRoute>\n              <FavoritesPage onQuickView={setQuickViewProduct} />\n            </ProtectedRoute>\n          }",
+      "component": "FavoritesPage"
+    },
+    {
+      "path": "/checkout",
+      "guards": [],
+      "stores": [],
+      "sourceFile": "src/App.tsx",
+      "line": 159,
+      "element": "element={<CheckoutPage />}",
+      "component": "CheckoutPage"
+    },
+    {
+      "path": "*",
+      "guards": [],
+      "stores": [],
+      "sourceFile": "src/App.tsx",
+      "line": 164,
+      "element": "element={<ErrorPage />}",
+      "component": "ErrorPage"
+    }
+  ],
+  "navigations": [
+    {
+      "type": "navigate",
+      "from": "AppContent",
+      "to": "/",
+      "condition": {
+        "kind": "guard",
+        "expression": "isProtectedPath && !isAuthenticated",
+        "description": "isProtectedPath && !isAuthenticated",
+        "line": 57
+      },
+      "sourceFile": "src/App.tsx",
+      "line": 59
+    },
+    {
+      "type": "navigate",
+      "from": "AppContent",
+      "to": "/",
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/App.tsx",
+      "line": 76
+    },
+    {
+      "type": "navigate",
+      "from": "AppContent",
+      "to": "/",
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/App.tsx",
+      "line": 83
+    },
+    {
+      "type": "navigate",
+      "from": "CartSidebar",
+      "to": "/checkout",
+      "locator": {
+        "strategy": "testid",
+        "testId": "cart-checkout-button",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/components/CartSidebar.tsx",
+      "line": 19
+    },
+    {
+      "type": "navigate",
+      "from": "Header",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "header-logout",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/components/Header.tsx",
+      "line": 54
+    },
+    {
+      "type": "Link",
+      "from": "Header",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "header-logo",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/components/Header.tsx",
+      "line": 86
+    },
+    {
+      "type": "Link",
+      "from": "Header",
+      "to": "/orders",
+      "locator": {
+        "strategy": "testid",
+        "testId": "header-nav-orders",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "logical-and",
+        "expression": "isUserMenuOpen",
+        "description": "isUserMenuOpen",
+        "line": 192
+      },
+      "sourceFile": "src/components/Header.tsx",
+      "line": 208
+    },
+    {
+      "type": "Link",
+      "from": "Header",
+      "to": "/profile",
+      "locator": {
+        "strategy": "testid",
+        "testId": "header-nav-profile",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "logical-and",
+        "expression": "isUserMenuOpen",
+        "description": "isUserMenuOpen",
+        "line": 192
+      },
+      "sourceFile": "src/components/Header.tsx",
+      "line": 220
+    },
+    {
+      "type": "Link",
+      "from": "Header",
+      "to": "/favorites",
+      "locator": {
+        "strategy": "testid",
+        "testId": "header-nav-favorites",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "logical-and",
+        "expression": "isUserMenuOpen",
+        "description": "isUserMenuOpen",
+        "line": 192
+      },
+      "sourceFile": "src/components/Header.tsx",
+      "line": 232
+    },
+    {
+      "type": "Navigate",
+      "from": "ProtectedRoute",
+      "to": "/",
+      "condition": {
+        "kind": "guard",
+        "expression": "!isAuthenticated",
+        "description": "!isAuthenticated",
+        "line": 11
+      },
+      "sourceFile": "src/components/ProtectedRoute.tsx",
+      "line": 12
+    },
+    {
+      "type": "navigate",
+      "from": "QuickViewModal",
+      "to": "`/product/${product.id}/reviews`",
+      "condition": {
+        "kind": "early-return",
+        "expression": "!product",
+        "description": "product",
+        "line": 41
+      },
+      "sourceFile": "src/components/QuickViewModal.tsx",
+      "line": 67
+    },
+    {
+      "type": "navigate",
+      "from": "ActivationSuccessPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "activation-continue",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/pages/ActivationSuccessPage.tsx",
+      "line": 96
+    },
+    {
+      "type": "navigate",
+      "from": "ActivationSuccessPage",
+      "to": "/",
+      "locator": {
+        "strategy": "role",
+        "role": "button",
+        "name": "Fazer Login",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/pages/ActivationSuccessPage.tsx",
+      "line": 110
+    },
+    {
+      "type": "navigate",
+      "from": "CheckoutPage",
+      "to": "`/orders/${order.id}`",
+      "locator": {
+        "strategy": "testid",
+        "testId": "checkout-place-order-button",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/pages/CheckoutPage.tsx",
+      "line": 242
+    },
+    {
+      "type": "Link",
+      "from": "CheckoutPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "checkout-empty-back",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "guard",
+        "expression": "items.length === 0",
+        "description": "items.length === 0",
+        "line": 245
+      },
+      "sourceFile": "src/pages/CheckoutPage.tsx",
+      "line": 262
+    },
+    {
+      "type": "Link",
+      "from": "CheckoutPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "checkout-back",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "early-return",
+        "expression": "items.length === 0",
+        "description": "!(items.length === 0)",
+        "line": 245
+      },
+      "sourceFile": "src/pages/CheckoutPage.tsx",
+      "line": 280
+    },
+    {
+      "type": "navigate",
+      "from": "ErrorPage",
+      "to": "-1",
+      "locator": {
+        "strategy": "testid",
+        "testId": "error-back",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/pages/ErrorPage.tsx",
+      "line": 50
+    },
+    {
+      "type": "navigate",
+      "from": "ErrorPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "error-home",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "none",
+        "description": "always rendered"
+      },
+      "sourceFile": "src/pages/ErrorPage.tsx",
+      "line": 63
+    },
+    {
+      "type": "Link",
+      "from": "FavoritesPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "favorites-empty-cta",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "ternary",
+        "expression": "favorites.length === 0",
+        "description": "favorites.length === 0",
+        "line": 30
+      },
+      "sourceFile": "src/pages/FavoritesPage.tsx",
+      "line": 51
+    },
+    {
+      "type": "Link",
+      "from": "OrderDetailPage",
+      "to": "/orders",
+      "locator": {
+        "strategy": "testid",
+        "testId": "orderdetail-notfound-back",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "guard",
+        "expression": "!order",
+        "description": "!order",
+        "line": 27
+      },
+      "sourceFile": "src/pages/OrderDetailPage.tsx",
+      "line": 44
+    },
+    {
+      "type": "Link",
+      "from": "OrderDetailPage",
+      "to": "/orders",
+      "locator": {
+        "strategy": "testid",
+        "testId": "orderdetail-back",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "early-return",
+        "expression": "!order",
+        "description": "order",
+        "line": 27
+      },
+      "sourceFile": "src/pages/OrderDetailPage.tsx",
+      "line": 64
+    },
+    {
+      "type": "Link",
+      "from": "OrdersPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "orders-empty-cta",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "ternary",
+        "expression": "orders.length === 0",
+        "description": "orders.length === 0",
+        "line": 24
+      },
+      "sourceFile": "src/pages/OrdersPage.tsx",
+      "line": 45
+    },
+    {
+      "type": "Link",
+      "from": "OrdersPage",
+      "to": "`/orders/${order.id}`",
+      "locator": {
+        "strategy": "testid",
+        "testId": "`order-card-${order.id}`",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "ternary",
+        "expression": "orders.length === 0",
+        "description": "!(orders.length === 0)",
+        "line": 24
+      },
+      "sourceFile": "src/pages/OrdersPage.tsx",
+      "line": 56
+    },
+    {
+      "type": "navigate",
+      "from": "ProductReviewsPage",
+      "to": "/",
+      "locator": {
+        "strategy": "testid",
+        "testId": "reviews-back",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "guard",
+        "expression": "!product",
+        "description": "!product",
+        "line": 96
+      },
+      "sourceFile": "src/pages/ProductReviewsPage.tsx",
+      "line": 105
+    },
+    {
+      "type": "navigate",
+      "from": "ProductReviewsPage",
+      "to": "`/?product=${productId}`",
+      "locator": {
+        "strategy": "testid",
+        "testId": "reviews-view-product",
+        "ambiguous": false
+      },
+      "condition": {
+        "kind": "early-return",
+        "expression": "!product",
+        "description": "product",
+        "line": 96
+      },
+      "sourceFile": "src/pages/ProductReviewsPage.tsx",
+      "line": 177
+    }
+  ],
+  "fixtures": [
+    {
+      "module": "src/data/coupons.ts",
+      "exportName": "coupons",
+      "entity": "coupon",
+      "idField": "code",
+      "ids": [
+        "BEMVINDO10",
+        "PROMO20",
+        "FRETE50",
+        "SUPER30",
+        "DESC25"
+      ],
+      "sample": {
+        "code": "BEMVINDO10",
+        "discountType": "percentage",
+        "description": "10% de desconto na primeira compra"
+      }
+    },
+    {
+      "module": "src/data/products.ts",
+      "exportName": "products",
+      "entity": "product",
+      "idField": "id",
+      "ids": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "sample": {
+        "id": "1",
+        "name": "Tênis Branco Clássico",
+        "description": "Tênis confortável para o dia a dia com couro premium e sola acolchoada para conforto durante todo o dia.",
+        "category": "fashion",
+        "subcategory": "shoes"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "route": "/",
+      "landmarks": [
+        "Explore nossa coleção exclusiva de produtos premium projetados para a vida moderna",
+        "Ordenar por:"
+      ],
+      "stateDependent": true,
+      "heading": "Descubra Seu Estilo"
+    },
+    {
+      "route": "/activation-success",
+      "landmarks": [
+        "Parabéns! Sua conta foi verificada e ativada.",
+        "Agora você pode fazer login e aproveitar todos os recursos da nossa plataforma, incluindo compras, favoritos e acompanhamento de pedidos.",
+        "Com sua conta você pode:",
+        "Explorar Produtos",
+        "Fazer Login"
+      ],
+      "stateDependent": false,
+      "heading": "Conta Ativada com Sucesso!"
+    },
+    {
+      "route": "/product/:productId/reviews",
+      "landmarks": [
+        "Voltar para a página inicial",
+        "Voltar ao Produto",
+        "avaliações)",
+        "Resumo das Avaliações",
+        "avaliações",
+        "Mais Recentes",
+        "Mais Antigas",
+        "Maior Nota",
+        "Menor Nota"
+      ],
+      "stateDependent": true
+    },
+    {
+      "route": "/orders",
+      "landmarks": [],
+      "stateDependent": true,
+      "heading": "Meus Pedidos"
+    },
+    {
+      "route": "/orders/:orderId",
+      "landmarks": [
+        "Pedido não encontrado",
+        "Voltar para Pedidos",
+        "Pedido Confirmado!",
+        "Obrigado pela sua compra. Seu pedido foi realizado com sucesso.",
+        "Realizado em",
+        "Itens (",
+        "Endereço de Entrega",
+        "Resumo do Pedido",
+        "Subtotal",
+        "Frete",
+        "Grátis",
+        "Total"
+      ],
+      "stateDependent": true,
+      "heading": "Pedido"
+    },
+    {
+      "route": "/profile",
+      "landmarks": [],
+      "stateDependent": true,
+      "heading": "Meu Perfil",
+      "transientFeedback": [
+        "Conta excluída com sucesso",
+        "Endereço adicionado com sucesso",
+        "Cartão adicionado com sucesso",
+        "Preencha todos os campos do cartão",
+        "Chave PIX adicionada com sucesso",
+        "Informe a chave PIX",
+        "Forma de pagamento adicionada",
+        "Perfil atualizado com sucesso",
+        "Endereço removido",
+        "Forma de pagamento removida"
+      ]
+    },
+    {
+      "route": "/favorites",
+      "landmarks": [],
+      "stateDependent": true,
+      "heading": "Meus Favoritos"
+    },
+    {
+      "route": "/checkout",
+      "landmarks": [
+        "Seu carrinho está vazio",
+        "Ver Produtos",
+        "Continuar Comprando",
+        "Método de Entrega",
+        "Forma de Pagamento",
+        "Resumo do Pedido",
+        "Cupom de Desconto",
+        "Subtotal",
+        "Frete",
+        "Grátis",
+        "Total",
+        "Finalizar Pedido"
+      ],
+      "stateDependent": true,
+      "heading": "Finalizar Compra",
+      "transientFeedback": [
+        "Cupom inválido",
+        "Cupom removido",
+        "Por favor, informe seu nome",
+        "Por favor, informe um e-mail válido",
+        "Por favor, informe seu telefone",
+        "Por favor, informe o endereço",
+        "Por favor, informe a cidade",
+        "Por favor, informe o estado",
+        "Por favor, informe o CEP",
+        "Por favor, selecione um endereço de entrega",
+        "Por favor, selecione a data e horário da entrega",
+        "Pedido realizado com sucesso!"
+      ]
+    },
+    {
+      "route": "*",
+      "landmarks": [
+        "Página Não Encontrada",
+        "Desculpe, a página que você está procurando não existe ou foi movida. Verifique se o endereço está correto ou volte para a página inicial.",
+        "Voltar",
+        "Página Inicial"
+      ],
+      "stateDependent": false,
+      "heading": "404"
+    }
+  ],
+  "appLevelFeedback": [
+    "Por favor, preencha todos os campos",
+    "Bem-vindo de volta!",
+    "Conta criada com sucesso!",
+    "Ocorreu um erro"
+  ]
+}
