@@ -30,8 +30,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       )}
 
       {/* Sidebar */}
-      <div className={cn(
-        'fixed top-0 right-0 h-full w-full max-w-md z-[50] transform transition-transform duration-300',
+      <div
+        data-testid="cart-sidebar"
+        className={cn(
+          'fixed top-0 right-0 h-full w-full max-w-md z-[50] transform transition-transform duration-300',
         isOpen ? 'translate-x-0' : 'translate-x-full',
         isDark ? 'bg-gray-900' : 'bg-white'
       )}>
@@ -131,6 +133,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity - 1, item.selectedSize, item.selectedColor, item.specialNotes)}
+                            data-testid={`cart-item-minus-${item.product.id}-${index}`}
                             className={cn(
                               'p-1 rounded transition-colors',
                               isDark
@@ -148,6 +151,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           </span>
                           <button
                             onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.selectedSize, item.selectedColor, item.specialNotes)}
+                            data-testid={`cart-item-plus-${item.product.id}-${index}`}
                             className={cn(
                               'p-1 rounded transition-colors',
                               isDark
@@ -160,6 +164,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.product.id, item.selectedSize, item.selectedColor, item.specialNotes)}
+                          data-testid={`cart-item-remove-${item.product.id}-${index}`}
                           className="p-1 text-red-500 hover:text-red-600 transition-colors"
                         >
                           <Trash2 className="h-5 w-5" />
@@ -194,6 +199,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </div>
               <button
                 onClick={handleCheckout}
+                data-testid="cart-checkout-button"
                 className="w-full py-3 rounded-lg font-medium bg-indigo-600 hover:bg-indigo-700 text-white transition-colors"
               >
                 Finalizar Compra

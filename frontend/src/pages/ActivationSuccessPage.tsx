@@ -94,6 +94,7 @@ export function ActivationSuccessPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => navigate('/')}
+            data-testid="activation-continue"
             className={cn(
               'flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors',
               isDark

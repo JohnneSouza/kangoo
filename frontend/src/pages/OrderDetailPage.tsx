@@ -43,6 +43,7 @@ export function OrderDetailPage() {
           </p>
           <Link
             to="/orders"
+            data-testid="orderdetail-notfound-back"
             className="inline-block mt-4 text-indigo-500 hover:text-indigo-600"
           >
             Voltar para Pedidos
@@ -62,6 +63,7 @@ export function OrderDetailPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           to="/orders"
+          data-testid="orderdetail-back"
           className={cn(
             'inline-flex items-center space-x-2 mb-6 transition-colors',
             isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'

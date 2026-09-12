@@ -15,6 +15,7 @@ export function FloatingCartButton({ onClick }: FloatingCartButtonProps) {
   return (
     <button
       onClick={onClick}
+      data-testid="cart-button"
       className={cn(
         'fixed bottom-6 right-6 z-40 p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110',
         isDark

@@ -148,6 +148,7 @@ export function ReviewsPopup({ product, onClose, onViewAll }: ReviewsPopupProps)
       )}>
         <button
           onClick={onViewAll}
+          data-testid="quickview-reviews-link"
           className={cn(
             'w-full flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-colors',
             isDark

@@ -204,6 +204,7 @@ export function HomePage({
               {hasActiveFilters && (
                 <button
                   onClick={onClearFilters}
+                  data-testid="home-clear-filters"
                   className={cn(
                     'flex items-center space-x-1 px-2 py-1 rounded-full text-sm transition-colors',
                     isDark 

@@ -103,6 +103,7 @@ export function ProductReviewsPage() {
           <h1 className="text-2xl font-bold mb-4">Produto não encontrado</h1>
           <button
             onClick={() => navigate('/')}
+            data-testid="reviews-back"
             className="text-indigo-600 hover:underline"
           >
             Voltar para a página inicial
@@ -174,6 +175,7 @@ export function ProductReviewsPage() {
         {/* Back Button */}
         <button
           onClick={() => navigate(`/?product=${productId}`)}
+          data-testid="reviews-view-product"
           className={cn(
             'flex items-center gap-2 mb-6 transition-colors',
             isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'

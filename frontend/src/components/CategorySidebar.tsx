@@ -141,6 +141,7 @@ export function CategorySidebar({ isOpen, onClose, onSelectCategory, onSelectSal
 
       {/* Sidebar */}
       <aside
+        data-testid="category-sidebar"
         className={cn(
           'fixed left-0 top-0 h-full w-80 z-50 transform transition-transform duration-300 ease-out shadow-2xl',
           isOpen ? 'translate-x-0' : '-translate-x-full',
@@ -171,6 +172,7 @@ export function CategorySidebar({ isOpen, onClose, onSelectCategory, onSelectSal
           {/* Sale Section */}
           <button
             onClick={handleSaleClick}
+            data-testid="category-sale"
             className={cn(
               'w-full flex items-center space-x-3 px-4 py-4 border-b transition-colors',
               isDark
@@ -212,6 +214,7 @@ export function CategorySidebar({ isOpen, onClose, onSelectCategory, onSelectSal
                 )}>
                   <button
                     onClick={() => handleCategoryClick(category)}
+                    data-testid={`category-item-${category.id}`}
                     className={cn(
                       'flex-1 text-left px-4 py-3 transition-colors',
                       isDark ? 'text-gray-300' : 'text-gray-700'

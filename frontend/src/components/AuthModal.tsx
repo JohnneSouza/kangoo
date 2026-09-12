@@ -50,10 +50,12 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
       />
 
       {/* Modal */}
-      <div className={cn(
-        'relative w-full max-w-md rounded-2xl shadow-2xl p-8',
-        isDark ? 'bg-gray-800' : 'bg-white'
-      )}>
+      <div
+        data-testid="auth-modal"
+        className={cn(
+          'relative w-full max-w-md rounded-2xl shadow-2xl p-8',
+          isDark ? 'bg-gray-800' : 'bg-white'
+        )}>
         <button
           onClick={onClose}
           className={cn(
@@ -89,6 +91,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
+                data-testid="auth-modal-email"
                 className={cn(
                   'w-full pl-10 pr-4 py-3 rounded-lg border transition-colors',
                   isDark
@@ -116,6 +119,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
+                data-testid="auth-modal-password"
                 className={cn(
                   'w-full pl-10 pr-4 py-3 rounded-lg border transition-colors',
                   isDark
@@ -128,6 +132,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
           <button
             type="submit"
+            data-testid="auth-modal-submit"
             disabled={isLoading}
             className={cn(
               'w-full py-3 rounded-lg font-medium transition-colors flex items-center justify-center',
@@ -147,6 +152,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
             {isLoginMode ? 'Não tem uma conta?' : 'Já tem uma conta?'}
             <button
               onClick={() => setIsLoginMode(!isLoginMode)}
+              data-testid="auth-modal-mode-switch"
               className="ml-1 text-indigo-500 hover:text-indigo-600 font-medium"
             >
               {isLoginMode ? 'Cadastre-se' : 'Entrar'}
