@@ -48,6 +48,7 @@ export function ErrorPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => navigate(-1)}
+            data-testid="error-back"
             className={cn(
               'flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors',
               isDark
@@ -60,6 +61,7 @@ export function ErrorPage() {
           </button>
           <button
             onClick={() => navigate('/')}
+            data-testid="error-home"
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium bg-indigo-600 hover:bg-indigo-700 text-white transition-colors"
           >
             <Home className="h-5 w-5" />

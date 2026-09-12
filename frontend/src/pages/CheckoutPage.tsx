@@ -261,6 +261,7 @@ export function CheckoutPage() {
           </p>
           <Link
             to="/"
+            data-testid="checkout-empty-back"
             className="inline-block mt-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
           >
             Ver Produtos
@@ -278,6 +279,7 @@ export function CheckoutPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
+          data-testid="checkout-back"
           className={cn(
             'inline-flex items-center space-x-2 mb-6 transition-colors',
             isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
@@ -471,6 +473,7 @@ export function CheckoutPage() {
                         value={scheduledDate}
                         onChange={(e) => setScheduledDate(e.target.value)}
                         min={today}
+                        data-testid="checkout-scheduled-date"
                         className={cn(
                           'w-full px-4 py-2 rounded-lg border transition-colors',
                           isDark
@@ -489,6 +492,7 @@ export function CheckoutPage() {
                       <select
                         value={scheduledTime}
                         onChange={(e) => setScheduledTime(e.target.value)}
+                        data-testid="checkout-scheduled-time"
                         className={cn(
                           'w-full px-4 py-2 rounded-lg border transition-colors',
                           isDark
@@ -990,6 +994,7 @@ export function CheckoutPage() {
                           setCouponError('');
                         }}
                         placeholder="Digite o código"
+                        data-testid="checkout-coupon-input"
                         className={cn(
                           'flex-1 px-3 py-2 text-sm rounded-lg border transition-colors',
                           couponError
@@ -1001,6 +1006,7 @@ export function CheckoutPage() {
                       />
                       <button
                         onClick={handleApplyCoupon}
+                        data-testid="checkout-coupon-apply"
                         className="px-4 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
                       >
                         Aplicar
@@ -1060,6 +1066,7 @@ export function CheckoutPage() {
 
               <button
                 onClick={handlePlaceOrder}
+                data-testid="checkout-place-order-button"
                 disabled={
                   (deliveryMethod === 'scheduled' && (!scheduledDate || !scheduledTime))
                 }

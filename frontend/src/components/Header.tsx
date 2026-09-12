@@ -77,12 +77,13 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                 isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
               )}
               aria-label="Abrir menu"
+              data-testid="header-hamburger"
             >
               <Menu className="h-6 w-6" />
             </button>
 
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2" data-testid="header-logo">
               <ShoppingBag className={cn('h-8 w-8', isDark ? 'text-indigo-400' : 'text-indigo-600')} />
               <span className={cn('text-xl font-bold hidden sm:block', isDark ? 'text-white' : 'text-gray-900')}>
                 ShopVerse
@@ -107,6 +108,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                       'p-1.5 rounded-full transition-colors flex-shrink-0',
                       isDark ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'
                     )}
+                    data-testid="header-search-close"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -115,6 +117,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                       ref={searchInputRef}
                       type="text"
                       placeholder="Buscar produtos..."
+                      data-testid="header-search-input"
                       value={searchQuery}
                       onChange={(e) => {
                         setSearchQuery(e.target.value);
@@ -142,6 +145,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                     isDark ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-200 text-gray-600'
                   )}
                   aria-label={isSearchOpen ? "Buscar" : "Abrir busca"}
+                  data-testid="header-search-toggle"
                 >
                   <Search className="h-5 w-5" />
                 </button>
@@ -156,6 +160,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                 isDark ? 'hover:bg-gray-700 text-yellow-400' : 'hover:bg-gray-100 text-gray-600'
               )}
               aria-label="Alternar tema"
+              data-testid="header-theme-toggle"
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
@@ -166,6 +171,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center space-x-2"
+                  data-testid="header-user-menu"
                 >
                   {user?.avatar ? (
                     <img
@@ -201,6 +207,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                     </div>
                     <Link
                       to="/orders"
+                      data-testid="header-nav-orders"
                       onClick={() => setIsUserMenuOpen(false)}
                       className={cn(
                         'flex items-center space-x-2 px-4 py-2 transition-colors',
@@ -212,6 +219,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                     </Link>
                     <Link
                       to="/profile"
+                      data-testid="header-nav-profile"
                       onClick={() => setIsUserMenuOpen(false)}
                       className={cn(
                         'flex items-center space-x-2 px-4 py-2 transition-colors',
@@ -223,6 +231,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                     </Link>
                     <Link
                       to="/favorites"
+                      data-testid="header-nav-favorites"
                       onClick={() => setIsUserMenuOpen(false)}
                       className={cn(
                         'flex items-center space-x-2 px-4 py-2 transition-colors',
@@ -234,6 +243,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
                     </Link>
                     <button
                       onClick={handleLogout}
+                      data-testid="header-logout"
                       className={cn(
                         'flex items-center space-x-2 w-full px-4 py-2 transition-colors',
                         isDark ? 'hover:bg-gray-700 text-red-400' : 'hover:bg-gray-100 text-red-600'
@@ -248,6 +258,7 @@ export function Header({ onOpenAuthModal, onSearch, onOpenSidebar }: HeaderProps
             ) : (
               <button
                 onClick={onOpenAuthModal}
+                data-testid="header-auth-button"
                 className={cn(
                   'px-3 py-2 sm:px-4 rounded-full font-medium transition-colors text-sm sm:text-base',
                   isDark

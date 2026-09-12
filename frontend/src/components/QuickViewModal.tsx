@@ -90,10 +90,12 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
         />
 
         {/* Modal */}
-        <div className={cn(
-          'relative w-full max-w-4xl max-h-[90vh] overflow-auto rounded-2xl shadow-2xl',
-          isDark ? 'bg-gray-800' : 'bg-white'
-        )}>
+        <div
+          data-testid="quickview-modal"
+          className={cn(
+            'relative w-full max-w-4xl max-h-[90vh] overflow-auto rounded-2xl shadow-2xl',
+            isDark ? 'bg-gray-800' : 'bg-white'
+          )}>
           {/* Header with close button */}
           <div className={cn(
             'sticky top-0 z-20 flex justify-between items-center p-4 border-b',

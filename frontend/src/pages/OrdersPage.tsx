@@ -44,6 +44,7 @@ export function OrdersPage() {
             </p>
             <Link
               to="/"
+              data-testid="orders-empty-cta"
               className="inline-block mt-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
             >
               Ver Produtos
@@ -55,6 +56,7 @@ export function OrdersPage() {
               <Link
                 key={order.id}
                 to={`/orders/${order.id}`}
+                data-testid={`order-card-${order.id}`}
                 className={cn(
                   'block rounded-xl p-6 transition-all hover:shadow-lg',
                   isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-white hover:shadow-md'

@@ -50,6 +50,7 @@ export function FavoritesPage({ onQuickView }: FavoritesPageProps) {
             </p>
             <Link
               to="/"
+              data-testid="favorites-empty-cta"
               className="inline-block mt-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
             >
               Ver Produtos

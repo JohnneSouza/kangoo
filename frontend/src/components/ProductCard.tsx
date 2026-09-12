@@ -41,6 +41,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   return (
     <div
       onClick={() => onQuickView(product)}
+      data-testid={`product-card-${product.id}`}
       className={cn(
         'group relative rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl',
         isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-white hover:shadow-lg'
