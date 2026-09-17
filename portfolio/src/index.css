@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Georgia", "Times New Roman", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ---------------- Theme variable tokens ---------------- */
+:root {
+  --accent: #d97706;
+  --accent-2: #b45309;
+  --accent-soft: #fef3c7;
+}
+
+:root[data-theme="chess"] {
+  --accent: #b8860b;
+  --accent-2: #6b7280;
+  --accent-soft: #f5f5f4;
+  --accent-rgb: 184, 134, 11;
+}
+
+:root[data-theme="rubik"] {
+  --accent: #ef4444;
+  --accent-2: #22c55e;
+  --accent-soft: #fde68a;
+  --accent-rgb: 239, 68, 68;
+}
+
+.text-accent {
+  color: var(--accent);
+}
+.bg-accent {
+  background-color: var(--accent);
+}
+.border-accent {
+  border-color: var(--accent);
+}
+
+/* ---------------- Chess theme decorations ---------------- */
+.chess-board-bg {
+  background-image:
+    linear-gradient(45deg, rgba(0, 0, 0, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0, 0, 0, 0.06) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.06) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.06) 75%);
+  background-size: 48px 48px;
+  background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
+}
+
+.dark .chess-board-bg {
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%);
+}
+
+.chess-divider {
+  height: 10px;
+  background-image: linear-gradient(90deg, #1f2937 50%, #f3f4f6 50%);
+  background-size: 20px 10px;
+  border-radius: 4px;
+}
+
+/* ---------------- Rubik's cube theme decorations ---------------- */
+.rubik-grid-bg {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.18) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.rubik-cube-face {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  padding: 3px;
+  background: #111827;
+  border-radius: 8px;
+}
+
+.rubik-cube-face span {
+  border-radius: 2px;
+  display: block;
+}
+
+.rubik-divider {
+  height: 10px;
+  background: linear-gradient(
+    90deg,
+    #ef4444 0%,
+    #ef4444 16.6%,
+    #f97316 16.6%,
+    #f97316 33.2%,
+    #facc15 33.2%,
+    #facc15 49.8%,
+    #22c55e 49.8%,
+    #22c55e 66.4%,
+    #3b82f6 66.4%,
+    #3b82f6 83%,
+    #f8fafc 83%,
+    #f8fafc 100%
+  );
+  border-radius: 4px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 999px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(6deg); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float 9s ease-in-out infinite;
+}
+.animate-float-slower {
+  animation: float 12s ease-in-out infinite;
+}
