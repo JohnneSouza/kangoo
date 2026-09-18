@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.tok-keyword {
+  color: #c084fc;
+}
+.tok-str {
+  color: #86efac;
+}
+.tok-comment {
+  color: #64748b;
+  font-style: italic;
+}
+.tok-num {
+  color: #fca5a5;
+}
+.tok-fn {
+  color: #7dd3fc;
+}
+.tok-attr {
+  color: #fcd34d;
+}
+.tok-var {
+  color: #93c5fd;
+}
+
