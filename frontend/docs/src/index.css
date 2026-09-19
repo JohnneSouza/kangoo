@@ -1,5 +1,167 @@
 @import "tailwindcss";
 
+/* ================ KANGOO SHARED TOKENS — MIRRORED BLOCK v1 (BEGIN) ========
+   This block is byte-identical in docs/src/index.css and
+   tools/src/index.css. Change it in both, or not at all.
+
+   Deliberately NOT in here: overrides of Tailwind's own namespaces
+   (--text-xs/sm/lg/..., --radius-*, --color-slate-*, --container-*), the
+   @tailwindcss/typography plugin (tools only), and each app's own CSS.
+
+   COLOUR VALUES ARE TAILWIND v4's OWN, VERBATIM. Every stock value below is
+   copied from tailwindcss/theme.css as an oklch() literal — not the older
+   v3 hex. This is load-bearing: v4's palette is defined in oklch and does NOT
+   round-trip to the v3 hex values (slate-600 is oklch 44.6% but #475569 is
+   not; violet-700 differs more still). Writing hex here would shift every
+   migrated colour by 1–4/255, so the semantic layer would not be a rename
+   of the stock ramp but a silent repaint, and docs and tools would disagree.
+   Literals rather than var(--color-slate-*): Tailwind prunes unused theme
+   variables, so a var() chain breaks the moment the stock class leaves source.
+   ======================================================================== */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* --- TYPE SCALE --------------------------------------------------------
+     One ladder, these names only. Stock steps are used at their stock values
+     so no existing literal changes meaning; only two names are new.
+
+       2xs 11 · xs 12 · sm 14 · md 15 · base 16 · lg 18 · xl 20
+       2xl 24 · 3xl 30 · 4xl 36 · 6xl 60
+
+     NAMING IS LOAD-BEARING. tailwind-merge classifies a `text-*` class as
+     font-size only if it matches (\d+(\.\d+)?)?(xs|sm|md|lg|xl). `2xs` and
+     `md` match; names like `body`/`display`/`prose` do NOT — they fall
+     through to text-COLOR and get silently deleted from any cn() call,
+     which is invisible in light mode. Do not rename these.
+  ------------------------------------------------------------------------ */
+  --text-2xs: 0.6875rem; /* 11px — micro: kbd hints, badges, eyebrow labels */
+  --text-2xs--line-height: 1rem;
+  --text-md: 0.9375rem; /* 15px — prose: long-form body copy, ledes */
+  --text-md--line-height: 1.625;
+
+  /* --- LAYOUT CONSTANTS --------------------------------------------------
+     These genuinely diverged (docs 3.5rem/18rem, tools 4rem/16rem).
+     Spec = tools' stack. Offsets derive from these, never re-typed:
+     h-header, pt-header, top-header, w-sidebar, w-drawer.
+  ------------------------------------------------------------------------ */
+  --spacing-header: 4rem; /* 64px — both apps */
+  --spacing-sidebar: 16rem; /* 256px — desktop rail */
+  --spacing-drawer: 18rem; /* 288px — mobile drawer */
+
+  /* --- SURFACES ----------------------------------------------------------
+     Light column = the exact class each token replaces. Dark column = the
+     exact class tools already uses, so migrating tools is dark-neutral.
+     @theme values are light-mode; the .dark block at the foot re-points them.
+  ------------------------------------------------------------------------ */
+  --color-canvas: #ffffff; /* page background */
+  --color-surface: #ffffff; /* panels, cards */
+  --color-surface-muted: oklch(98.4% 0.003 247.858); /* slate-50 */
+  --color-surface-strong: oklch(96.8% 0.007 247.896); /* slate-100 */
+  --color-surface-hover: oklch(98.4% 0.003 247.858); /* slate-50 */
+
+  --color-line: oklch(92.9% 0.013 255.508); /* slate-200 */
+  --color-line-soft: oklch(96.8% 0.007 247.896); /* slate-100 */
+
+  /* --- TEXT --------------------------------------------------------------
+     4 steps, each absorbing 1–2 neighbouring slate steps.
+  ------------------------------------------------------------------------ */
+  --color-fg: oklch(20.8% 0.042 265.755); /* slate-900 — headings, primary */
+  --color-fg-body: oklch(44.6% 0.043 257.281); /* slate-600 — body, slate-700 */
+  --color-fg-muted: oklch(55.4% 0.046 257.417); /* slate-500 — secondary */
+  --color-fg-subtle: oklch(70.4% 0.04 256.788); /* slate-400 — labels, meta */
+
+  /* --- BRAND FILL / TINTS ------------------------------------------------
+     `brand` is a FILL and is identical in both themes, so existing primary
+     buttons do not change appearance in dark mode. `link` is brand-as-text
+     and must lift in dark to stay legible on slate-950.
+  ------------------------------------------------------------------------ */
+  --color-brand: oklch(54.1% 0.281 293.009); /* violet-600 */
+  --color-brand-hover: oklch(60.6% 0.25 292.717); /* violet-500 */
+  --color-brand-active: oklch(49.1% 0.27 292.581); /* violet-700 */
+  --color-brand-fg: #ffffff;
+  --color-link: oklch(54.1% 0.281 293.009); /* violet-600 */
+  --color-brand-soft: oklch(96.9% 0.016 293.756); /* violet-50 */
+  --color-brand-soft-fg: oklch(49.1% 0.27 292.581); /* violet-700 */
+  --color-brand-line: oklch(89.4% 0.057 293.283); /* violet-200 */
+  --color-brand-ring: oklch(94.3% 0.029 294.588); /* violet-100 */
+
+  /* --- STATUS -----------------------------------------------------------
+     Only tools uses these today; present so error styling is shared.
+  ------------------------------------------------------------------------ */
+  --color-danger: oklch(58.6% 0.253 17.585); /* rose-600 */
+  --color-danger-soft: oklch(96.9% 0.015 12.422); /* rose-50 */
+  --color-danger-line: oklch(89.2% 0.058 10.001); /* rose-200 */
+
+  /* --- CODE SURFACE ------------------------------------------------------
+     The code card is dark in BOTH themes (idiomatic in light docs too), so
+     these deliberately have no .dark override. Not a palette step, so hex.
+  ------------------------------------------------------------------------ */
+  --color-code-bg: #0b1120;
+  --color-code-bar: #0d1424;
+
+  /* --- CONTRACTS (documented here, not tokenised) ------------------------
+     RADIUS — stock values already agree across both apps:
+       sm    4px   micro chips: inline <code>, <kbd>, table code
+       md    6px   controls: nav/sidebar items, icon buttons, tabs, lang switcher
+       lg    8px   form + content: buttons, inputs, callouts, dropdowns
+       xl   12px   outer surfaces: cards, panels, modals, code card
+       full        pills, badges, toggle knob, scrollbar thumb
+     Bare `rounded` is retired (Tailwind's deprecated alias for 4px).
+
+     Z-INDEX — 30 header · 40 scrims · 50 drawers/panels/modals.
+
+     CONTAINER — mx-auto w-full max-w-6xl px-6 lg:px-10.
+
+     STICKY OFFSET — top-20 (5rem) = header + 1rem. Used by the doc code
+     rail and the tool aside.
+  ------------------------------------------------------------------------ */
+}
+
+:root {
+  /* Keep in sync with --spacing-header. */
+  --rail-height: calc(100vh - var(--spacing-header));
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------------
+   DARK THEME — overrides the semantic layer only, so every bg-canvas /
+   text-fg / border-line / bg-brand utility flips with no `dark:` class in
+   any component.
+
+   Unlayered on purpose: unlayered CSS beats Tailwind's @layer theme, so this
+   wins over the :root values emitted above. Moving this block into
+   @layer base will silently disable dark mode.
+------------------------------------------------------------------------- */
+.dark {
+  color-scheme: dark;
+
+  --color-canvas: oklch(12.9% 0.042 264.695); /* slate-950 */
+  --color-surface: oklch(20.8% 0.042 265.755); /* slate-900 */
+  --color-surface-muted: oklch(12.9% 0.042 264.695); /* slate-950 */
+  --color-surface-strong: oklch(27.9% 0.041 260.031); /* slate-800 */
+  --color-surface-hover: oklch(27.9% 0.041 260.031); /* slate-800 */
+
+  --color-line: oklch(27.9% 0.041 260.031); /* slate-800 */
+  --color-line-soft: oklch(27.9% 0.041 260.031); /* slate-800 */
+
+  --color-fg: oklch(98.4% 0.003 247.858); /* slate-50 */
+  --color-fg-body: oklch(86.9% 0.022 252.894); /* slate-300 */
+  --color-fg-muted: oklch(70.4% 0.04 256.788); /* slate-400 */
+  --color-fg-subtle: oklch(55.4% 0.046 257.417); /* slate-500 */
+
+  --color-link: oklch(70.2% 0.183 293.541); /* violet-400 */
+
+  --color-brand-soft: oklch(60.6% 0.25 292.717 / 0.1); /* violet-500/10 */
+  --color-brand-soft-fg: oklch(81.1% 0.111 293.571); /* violet-300 */
+  --color-brand-line: oklch(38% 0.189 293.745); /* violet-900 */
+  --color-brand-ring: oklch(38% 0.189 293.745 / 0.4); /* violet-900/40 */
+
+  --color-danger: oklch(71.2% 0.194 13.428); /* rose-400 */
+  --color-danger-soft: oklch(45.5% 0.188 13.697 / 0.25); /* rose-800/25 */
+  --color-danger-line: oklch(45.5% 0.188 13.697 / 0.5); /* rose-800/50 */
+}
+/* ================= KANGOO SHARED TOKENS — MIRRORED BLOCK v1 (END) ======== */
+
 html {
   scroll-behavior: smooth;
 }
@@ -26,4 +188,3 @@ html {
 .tok-var {
   color: #93c5fd;
 }
-

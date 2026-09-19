@@ -38,28 +38,28 @@ export default function Home() {
 
   return (
     <div>
-      <section className="border-b border-slate-200 bg-gradient-to-b from-violet-50/60 to-white">
-        <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-200 bg-white px-3 py-1 text-[12px] font-semibold text-violet-600">
+      <section className="border-b border-line bg-gradient-to-b from-violet-50/60 to-white dark:from-violet-500/5 dark:to-transparent">
+        <div className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-line bg-surface px-3 py-1 text-xs font-semibold text-link">
             ● API v1 — stable
           </span>
-          <h1 className="mt-5 max-w-2xl text-[38px] font-bold leading-tight tracking-tight text-slate-900 sm:text-[44px]">
+          <h1 className="mt-5 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-fg sm:text-4xl">
             Everything you need to build commerce into your product.
           </h1>
-          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-slate-500">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-fg-muted">
             Cartly is a developer-first API for products, carts, checkout, payments, and order
             management. Explore guides, the full API reference, and ready-to-run examples.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/quickstart"
-              className="rounded-lg bg-slate-900 px-5 py-2.5 text-[14px] font-semibold text-white shadow-sm transition hover:bg-slate-800"
+              className="rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-hover"
             >
               Start the quickstart
             </Link>
             <Link
               to="/api-products"
-              className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-[14px] font-semibold text-slate-700 transition hover:bg-slate-50"
+              className="rounded-lg border border-line bg-surface px-5 py-2.5 text-sm font-semibold text-fg-body transition hover:bg-surface-hover"
             >
               Browse API reference
             </Link>
@@ -67,13 +67,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-14 lg:px-10">
+      <section className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="text-[13px] font-semibold uppercase tracking-wider text-slate-400">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-fg-subtle">
               Create a product and take a payment in one request
             </h2>
-            <p className="mt-2 text-[14.5px] leading-relaxed text-slate-500">
+            <p className="mt-2 text-md leading-relaxed text-fg-muted">
               Every Cartly resource is available over a single, consistent REST API. Toggle the
               language above any snippet across the whole site — it's remembered as you browse.
             </p>
@@ -89,9 +89,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-slate-50/60 py-14">
-        <div className="mx-auto max-w-6xl px-6 lg:px-10">
-          <h2 className="text-[13px] font-semibold uppercase tracking-wider text-slate-400">
+      <section className="border-t border-line bg-surface-muted/60 py-12">
+        <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-fg-subtle">
             Explore the docs
           </h2>
           <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -99,16 +99,16 @@ export default function Home() {
               <Link
                 key={c.title}
                 to={c.to}
-                className="group flex flex-col rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/60"
+                className="group flex flex-col rounded-xl border border-line bg-surface p-5 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/60 dark:hover:shadow-black/40"
               >
                 <span
-                  className={`mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-[16px] ${c.accent}`}
+                  className={`mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-base ${c.accent}`}
                 >
                   {c.icon}
                 </span>
-                <h3 className="text-[15px] font-semibold text-slate-900">{c.title}</h3>
-                <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">{c.description}</p>
-                <span className="mt-3 text-[13px] font-semibold text-violet-600 opacity-0 transition group-hover:opacity-100">
+                <h3 className="text-md font-semibold text-fg">{c.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c.description}</p>
+                <span className="mt-3 text-sm font-semibold text-link opacity-0 transition group-hover:opacity-100">
                   Explore →
                 </span>
               </Link>
@@ -117,18 +117,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-14 lg:px-10">
-        <h2 className="text-[13px] font-semibold uppercase tracking-wider text-slate-400">
+      <section className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-fg-subtle">
           Full index
         </h2>
         <div className="mt-5 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {groups.map((g) => (
             <div key={g.group}>
-              <h3 className="text-[13.5px] font-semibold text-slate-900">{g.group}</h3>
+              <h3 className="text-sm font-semibold text-fg">{g.group}</h3>
               <ul className="mt-2 space-y-1.5">
                 {g.pages.map((p) => (
                   <li key={p.slug}>
-                    <Link to={`/${p.slug}`} className="text-[13.5px] text-slate-500 hover:text-violet-600">
+                    <Link to={`/${p.slug}`} className="text-sm text-fg-muted hover:text-link">
                       {p.title}
                     </Link>
                   </li>

@@ -22,7 +22,7 @@ export function Sidebar({
           onClose?.();
         }}
         className={cn(
-          "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition",
+          "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition",
           activeToolId === null
             ? "bg-violet-50 text-violet-700 dark:bg-violet-500/10 dark:text-violet-300"
             : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
@@ -51,7 +51,7 @@ export function Sidebar({
                         onClose?.();
                       }}
                       className={cn(
-                        "flex w-full items-center gap-2.5 rounded-lg px-3 py-1.5 text-left text-sm transition",
+                        "flex w-full items-center gap-2.5 rounded-md px-3 py-1.5 text-left text-sm transition",
                         isActive
                           ? "bg-violet-50 font-medium text-violet-700 dark:bg-violet-500/10 dark:text-violet-300"
                           : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"

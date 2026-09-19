@@ -23,7 +23,7 @@ function CopyButton({ text }: { text: string }) {
           // ignore
         }
       }}
-      className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium text-slate-400 transition hover:bg-white/5 hover:text-slate-200"
+      className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-2xs font-medium text-slate-400 transition hover:bg-white/5 hover:text-slate-200"
     >
       {copied ? (
         <>
@@ -62,15 +62,15 @@ export default function CodeBlock({ title, code, response }: CodeBlockProps) {
   );
 
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-800/80 bg-[#0b1120] shadow-xl shadow-black/20 ring-1 ring-black/40">
-      <div className="flex items-center justify-between border-b border-slate-800/80 bg-[#0d1424] px-3 py-2">
+    <div className="overflow-hidden rounded-xl border border-slate-800/80 bg-code-bg shadow-xl shadow-black/20 ring-1 ring-black/40">
+      <div className="flex items-center justify-between border-b border-slate-800/80 bg-code-bar px-3 py-2">
         <div className="flex items-center gap-1 overflow-x-auto">
           {available.map((l) => (
             <button
               key={l.id}
               onClick={() => setLang(l.id)}
               className={cn(
-                "whitespace-nowrap rounded-md px-2.5 py-1 text-[11.5px] font-medium transition",
+                "whitespace-nowrap rounded-md px-2.5 py-1 text-2xs font-medium transition",
                 active === l.id
                   ? "bg-white/10 text-white"
                   : "text-slate-500 hover:text-slate-300"
@@ -81,11 +81,11 @@ export default function CodeBlock({ title, code, response }: CodeBlockProps) {
           ))}
         </div>
         <div className="flex items-center gap-2 pl-2">
-          {title && <span className="hidden text-[11px] text-slate-500 sm:inline">{title}</span>}
+          {title && <span className="hidden text-2xs text-slate-500 sm:inline">{title}</span>}
           <CopyButton text={snippet} />
         </div>
       </div>
-      <pre className="max-h-[420px] overflow-auto px-4 py-3.5 text-[12.5px] leading-relaxed">
+      <pre className="max-h-[420px] overflow-auto px-4 py-3.5 text-xs leading-relaxed">
         <code
           className="font-mono text-slate-200"
           dangerouslySetInnerHTML={{ __html: highlighted }}
@@ -93,11 +93,11 @@ export default function CodeBlock({ title, code, response }: CodeBlockProps) {
       </pre>
       {response && (
         <div className="border-t border-slate-800/80">
-          <div className="flex items-center gap-1.5 bg-[#0d1424] px-4 py-1.5 text-[11px] font-medium text-slate-500">
+          <div className="flex items-center gap-1.5 bg-code-bar px-4 py-1.5 text-2xs font-medium text-slate-500">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             Response
           </div>
-          <pre className="max-h-[320px] overflow-auto px-4 py-3.5 text-[12.5px] leading-relaxed">
+          <pre className="max-h-[320px] overflow-auto px-4 py-3.5 text-xs leading-relaxed">
             <code
               className="font-mono text-slate-200"
               dangerouslySetInnerHTML={{ __html: highlightedResponse }}

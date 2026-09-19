@@ -41,17 +41,17 @@ function AppShell() {
       <TopBar onNavigate={navigate} onToggleSidebar={() => setSidebarOpen(true)} onSelectHome={() => navigate(null)} />
 
       <div className="mx-auto flex w-full flex-1">
-        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-slate-200 dark:border-slate-800 lg:block">
+        <aside className="sticky top-header hidden h-(--rail-height) w-sidebar shrink-0 border-r border-slate-200 dark:border-slate-800 lg:block">
           <Sidebar activeToolId={activeToolId} onSelect={navigate} />
         </aside>
 
         {sidebarOpen && (
           <div className="fixed inset-0 z-40 lg:hidden">
             <div className="absolute inset-0 bg-slate-900/40" onClick={() => setSidebarOpen(false)} />
-            <div className="absolute inset-y-0 left-0 w-72 bg-white shadow-xl dark:bg-slate-950">
+            <div className="absolute inset-y-0 left-0 w-drawer bg-white shadow-xl dark:bg-slate-950">
               <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3 dark:border-slate-800">
                 <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">{t.common.allTools}</span>
-                <button onClick={() => setSidebarOpen(false)} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                <button onClick={() => setSidebarOpen(false)} className="rounded-md p-1.5 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
                   <X className="h-4 w-4" />
                 </button>
               </div>

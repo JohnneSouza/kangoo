@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DevToolbox — Developer Tools Reference</title>
+    <script>
+      // Blocking on purpose: sets the theme before first paint, so a dark-mode
+      // load never flashes white. The key MUST match STORAGE_KEY in
+      // src/theme/ThemeContext.tsx and the copy in docs/index.html.
+      (function () {
+        try {
+          var t = localStorage.getItem("kangoo:theme");
+          if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -14,12 +14,12 @@ function PageRoute() {
   if (!page) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-        <p className="text-[64px]">🧭</p>
-        <h1 className="mt-2 text-2xl font-bold text-slate-900">Page not found</h1>
-        <p className="mt-2 text-slate-500">We couldn't find the docs page you were looking for.</p>
+        <p className="text-6xl">🧭</p>
+        <h1 className="mt-2 text-2xl font-bold text-fg">Page not found</h1>
+        <p className="mt-2 text-fg-muted">We couldn't find the docs page you were looking for.</p>
         <Link
           to="/"
-          className="mt-6 inline-block rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+          className="mt-6 inline-block rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-hover"
         >
           Back to docs home
         </Link>
@@ -36,16 +36,16 @@ function Layout() {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-canvas">
       <Topbar onMenuClick={() => setSidebarOpen((o) => !o)} />
-      <div className="flex pt-14">
-        {!isHome && <Sidebar open={sidebarOpen} onNavigate={() => setSidebarOpen(false)} />}
+      <div className="flex pt-header">
         {sidebarOpen && !isHome && (
           <div
-            className="fixed inset-0 z-30 bg-slate-900/30 lg:hidden"
+            className="fixed inset-0 z-40 bg-slate-900/30 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
+        {!isHome && <Sidebar open={sidebarOpen} onNavigate={() => setSidebarOpen(false)} />}
         <main className="min-w-0 flex-1">
           <Routes>
             <Route path="/" element={<Home />} />

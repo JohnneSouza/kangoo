@@ -14,7 +14,7 @@ export function Home({ onNavigate }: { onNavigate: (toolId: string) => void }) {
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
           {t.common.homeTitle}
         </h1>
-        <p className="mt-4 text-[15px] leading-relaxed text-slate-500 dark:text-slate-400">{t.common.homeSubtitle}</p>
+        <p className="mt-4 text-md leading-relaxed text-slate-500 dark:text-slate-400">{t.common.homeSubtitle}</p>
         <p className="mt-3 text-sm text-slate-400 dark:text-slate-500">{t.common.homeSearchHint}</p>
       </div>
 
@@ -40,7 +40,7 @@ export function Home({ onNavigate }: { onNavigate: (toolId: string) => void }) {
                         <Icon className="h-5 w-5" />
                       </span>
                       <span className="flex-1">
-                        <span className="flex items-center gap-1.5 text-[15px] font-medium text-slate-800 dark:text-slate-100">
+                        <span className="flex items-center gap-1.5 text-md font-medium text-slate-800 dark:text-slate-100">
                           {copy.name}
                           <ArrowRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" />
                         </span>

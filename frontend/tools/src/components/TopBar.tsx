@@ -19,10 +19,10 @@ export function TopBar({
   const [langOpen, setLangOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-slate-200 bg-white/80 px-4 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80 sm:px-6">
+    <header className="sticky top-0 z-30 flex h-header shrink-0 items-center gap-3 border-b border-slate-200 bg-white/80 px-4 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80 sm:px-6">
       <button
         onClick={onToggleSidebar}
-        className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 lg:hidden"
+        className="rounded-md p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 lg:hidden"
         aria-label="Toggle menu"
       >
         <Menu className="h-5 w-5" />
@@ -34,7 +34,7 @@ export function TopBar({
         </span>
         <span className="hidden flex-col leading-none sm:flex">
           <span className="text-sm font-semibold text-slate-900 dark:text-white">{t.common.appName}</span>
-          <span className="text-[11px] text-slate-400 dark:text-slate-500">{t.common.appTagline}</span>
+          <span className="text-2xs text-slate-400 dark:text-slate-500">{t.common.appTagline}</span>
         </span>
       </button>
 
@@ -47,7 +47,7 @@ export function TopBar({
           <button
             onClick={() => setLangOpen((v) => !v)}
             onBlur={() => window.setTimeout(() => setLangOpen(false), 120)}
-            className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+            className="rounded-md border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
           >
             {locale}
           </button>
@@ -72,7 +72,7 @@ export function TopBar({
 
         <button
           onClick={toggleTheme}
-          className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+          className="rounded-md border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
           aria-label="Toggle theme"
         >
           {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

@@ -40,7 +40,11 @@ export function TextArea({ className, ...props }: TextareaHTMLAttributes<HTMLTex
     <textarea
       spellCheck={false}
       className={cn(
-        "w-full resize-y rounded-lg border border-slate-200 bg-slate-50 p-3 font-mono text-sm text-slate-900 outline-none transition focus:border-violet-400 focus:bg-white focus:ring-2 focus:ring-violet-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-violet-500 dark:focus:ring-violet-900/40",
+        // focus:bg-surface, not focus:bg-white: `bg-white` is theme-blind, and
+        // `dark:bg-slate-950` cannot beat a (0,2,0) focus rule because
+        // `:where()` in the dark variant contributes no specificity. White
+        // background under `dark:text-slate-100` measured 1.10:1 contrast.
+        "w-full resize-y rounded-lg border border-slate-200 bg-slate-50 p-3 font-mono text-sm text-slate-900 outline-none transition focus:border-violet-400 focus:bg-surface focus:ring-2 focus:ring-violet-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-violet-500 dark:focus:ring-violet-900/40",
         className
       )}
       {...props}
@@ -53,7 +57,8 @@ export function TextInput({ className, ...props }: React.InputHTMLAttributes<HTM
     <input
       spellCheck={false}
       className={cn(
-        "w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-mono text-sm text-slate-900 outline-none transition focus:border-violet-400 focus:bg-white focus:ring-2 focus:ring-violet-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-violet-500 dark:focus:ring-violet-900/40",
+        // See TextArea: focus:bg-white made the focused field unreadable in dark.
+        "w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-mono text-sm text-slate-900 outline-none transition focus:border-violet-400 focus:bg-surface focus:ring-2 focus:ring-violet-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-violet-500 dark:focus:ring-violet-900/40",
         className
       )}
       {...props}

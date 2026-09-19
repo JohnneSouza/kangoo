@@ -4,9 +4,9 @@ import { cn } from "../utils/cn";
 
 function Callout({ variant, text }: { variant: "info" | "warning" | "success"; text: string }) {
   const styles = {
-    info: "border-sky-200 bg-sky-50 text-sky-900",
-    warning: "border-amber-200 bg-amber-50 text-amber-900",
-    success: "border-emerald-200 bg-emerald-50 text-emerald-900",
+    info: "border-sky-200 bg-sky-50 text-sky-900 dark:border-sky-500/30 dark:bg-sky-500/10 dark:text-sky-200",
+    warning: "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200",
+    success: "border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200",
   }[variant];
   const icon = {
     info: "ℹ️",
@@ -14,7 +14,7 @@ function Callout({ variant, text }: { variant: "info" | "warning" | "success"; t
     success: "✅",
   }[variant];
   return (
-    <div className={cn("flex gap-3 rounded-lg border px-4 py-3 text-[13.5px] leading-relaxed", styles)}>
+    <div className={cn("flex gap-3 rounded-lg border px-4 py-3 text-sm leading-relaxed", styles)}>
       <span className="mt-0.5">{icon}</span>
       <p>{text}</p>
     </div>
@@ -23,12 +23,12 @@ function Callout({ variant, text }: { variant: "info" | "warning" | "success"; t
 
 function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
-    <div className="overflow-x-auto rounded-lg border border-slate-200">
-      <table className="w-full border-collapse text-left text-[13.5px]">
+    <div className="overflow-x-auto rounded-lg border border-line">
+      <table className="w-full border-collapse text-left text-sm">
         <thead>
-          <tr className="bg-slate-50">
+          <tr className="bg-surface-muted">
             {headers.map((h) => (
-              <th key={h} className="border-b border-slate-200 px-3.5 py-2 font-semibold text-slate-700">
+              <th key={h} className="border-b border-line px-3.5 py-2 font-semibold text-fg-body">
                 {h}
               </th>
             ))}
@@ -36,10 +36,10 @@ function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-b border-slate-100 last:border-0">
+            <tr key={i} className="border-b border-line-soft last:border-0">
               {row.map((cell, j) => (
-                <td key={j} className="px-3.5 py-2 align-top text-slate-600">
-                  {j === 0 ? <code className="rounded bg-slate-100 px-1.5 py-0.5 text-[12px] text-violet-700">{cell}</code> : cell}
+                <td key={j} className="px-3.5 py-2 align-top text-fg-body">
+                  {j === 0 ? <code className="rounded-sm bg-surface-strong px-1.5 py-0.5 text-xs text-brand-soft-fg">{cell}</code> : cell}
                 </td>
               ))}
             </tr>
@@ -54,7 +54,7 @@ function renderInlineCode(text: string) {
   const parts = text.split(/(`[^`]+`)/g);
   return parts.map((part, i) =>
     part.startsWith("`") && part.endsWith("`") ? (
-      <code key={i} className="rounded bg-violet-50 px-1.5 py-0.5 font-mono text-[12.5px] text-violet-700">
+      <code key={i} className="rounded-sm bg-brand-soft px-1.5 py-0.5 font-mono text-xs text-brand-soft-fg">
         {part.slice(1, -1)}
       </code>
     ) : (
@@ -67,25 +67,25 @@ function TextBlock({ block }: { block: Block }) {
   switch (block.type) {
     case "heading":
       return block.level === 3 ? (
-        <h3 id={block.id} className="scroll-mt-24 pt-2 text-[16px] font-semibold tracking-tight text-slate-900">
+        <h3 id={block.id} className="scroll-mt-24 pt-2 text-base font-semibold tracking-tight text-fg">
           {block.text}
         </h3>
       ) : (
-        <h2 id={block.id} className="scroll-mt-24 border-t border-slate-100 pt-8 text-[20px] font-semibold tracking-tight text-slate-900 first:border-0 first:pt-0">
+        <h2 id={block.id} className="scroll-mt-24 border-t border-line-soft pt-8 text-xl font-semibold tracking-tight text-fg first:border-0 first:pt-0">
           {block.text}
         </h2>
       );
     case "paragraph":
-      return <p className="text-[14.5px] leading-relaxed text-slate-600">{renderInlineCode(block.text)}</p>;
+      return <p className="text-md leading-relaxed text-fg-body">{renderInlineCode(block.text)}</p>;
     case "list":
       return block.ordered ? (
-        <ol className="list-decimal space-y-1.5 pl-5 text-[14.5px] leading-relaxed text-slate-600">
+        <ol className="list-decimal space-y-1.5 pl-5 text-md leading-relaxed text-fg-body">
           {block.items.map((item, i) => (
             <li key={i}>{renderInlineCode(item)}</li>
           ))}
         </ol>
       ) : (
-        <ul className="list-disc space-y-1.5 pl-5 text-[14.5px] leading-relaxed text-slate-600">
+        <ul className="list-disc space-y-1.5 pl-5 text-md leading-relaxed text-fg-body">
           {block.items.map((item, i) => (
             <li key={i}>{renderInlineCode(item)}</li>
           ))}
@@ -106,18 +106,18 @@ export default function DocPage({ page }: { page: DocPageType }) {
   const headings = page.blocks.filter((b) => b.type === "heading") as Extract<Block, { type: "heading" }>[];
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10 lg:px-10">
-      <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-violet-500">
+    <div className="mx-auto w-full max-w-6xl px-6 py-8 lg:px-10">
+      <div className="mb-2 text-2xs font-semibold uppercase tracking-wider text-link">
         {page.group}
       </div>
-      <h1 className="text-[28px] font-bold tracking-tight text-slate-900">{page.title}</h1>
-      <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-500">{page.description}</p>
+      <h1 className="text-2xl font-bold tracking-tight text-fg sm:text-3xl">{page.title}</h1>
+      <p className="mt-2 max-w-2xl text-md leading-relaxed text-fg-muted">{page.description}</p>
 
       {headings.length > 2 && (
-        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-1.5 rounded-lg border border-slate-100 bg-slate-50/60 px-4 py-3 text-[12.5px]">
-          <span className="font-semibold text-slate-400">On this page:</span>
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-1.5 rounded-lg border border-line-soft bg-surface-muted/60 px-4 py-3 text-xs">
+          <span className="font-semibold text-fg-subtle">On this page:</span>
           {headings.map((h) => (
-            <a key={h.id} href={`#${h.id}`} className="text-violet-600 hover:underline">
+            <a key={h.id} href={`#${h.id}`} className="text-link hover:underline">
               {h.text}
             </a>
           ))}
