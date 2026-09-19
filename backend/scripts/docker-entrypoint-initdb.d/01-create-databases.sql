@@ -1,2 +1,0 @@
-CREATE DATABASE customer;
-CREATE DATABASE auth;
