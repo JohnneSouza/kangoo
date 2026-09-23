@@ -4,7 +4,6 @@ import dev.kangoo.auth.domain.repository.UserRepository;
 import dev.kangoo.auth.domain.user.User;
 import dev.kangoo.auth.infrastructure.persistence.entity.UserEntity;
 import dev.kangoo.auth.infrastructure.persistence.mapper.UserPersistenceMapper;
-import dev.kangoo.auth.infrastructure.repository.SpringDataUserRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

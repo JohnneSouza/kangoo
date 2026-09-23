@@ -2,6 +2,7 @@ package dev.kangoo.auth.infrastructure.messaging.publisher;
 
 import dev.kangoo.auth.application.event.RegisterCustomerEvent;
 import dev.kangoo.auth.application.port.CustomerRegistrationPublisher;
+import dev.kangoo.auth.infrastructure.messaging.config.MessagingConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -12,10 +13,9 @@ public class CustomerRegistrationRabbitPublisher implements CustomerRegistration
 
     private static final Logger log = LoggerFactory.getLogger(CustomerRegistrationRabbitPublisher.class);
 
-    private final RabbitTemplate rabbitTemplate;
-
-    private static final String EXCHANGE = "identity.customer.events";
     private static final String ROUTING_KEY = "identity.customer.register";
+
+    private final RabbitTemplate rabbitTemplate;
 
     public CustomerRegistrationRabbitPublisher(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
@@ -24,6 +24,6 @@ public class CustomerRegistrationRabbitPublisher implements CustomerRegistration
     @Override
     public void publish(RegisterCustomerEvent event) {
         log.info("Publishing Register Customer Event for customerId={}", event.customerId());
-        this.rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, event);
+        this.rabbitTemplate.convertAndSend(MessagingConfig.IDENTITY_CUSTOMER_EVENTS, ROUTING_KEY, event);
     }
 }

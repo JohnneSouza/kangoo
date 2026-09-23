@@ -6,6 +6,7 @@ import dev.kangoo.auth.application.usecase.ActivateUserUseCase;
 import dev.kangoo.auth.application.usecase.AuthenticateUserCommand;
 import dev.kangoo.auth.application.usecase.AuthenticateUserUseCase;
 import dev.kangoo.auth.application.view.AuthenticationView;
+import dev.kangoo.auth.infrastructure.config.ActivationProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -19,21 +20,27 @@ public class AuthController implements AuthAPI {
 
     private final AuthenticateUserUseCase authenticateUserUseCase;
     private final ActivateUserUseCase activateUserUseCase;
+    private final TokenCookieProperties cookieProperties;
+    private final ActivationProperties activationProperties;
 
-    public AuthController(AuthenticateUserUseCase authenticateUserUseCase, ActivateUserUseCase activateUserUseCase) {
+    public AuthController(AuthenticateUserUseCase authenticateUserUseCase, ActivateUserUseCase activateUserUseCase,
+                          TokenCookieProperties cookieProperties, ActivationProperties activationProperties) {
         this.authenticateUserUseCase = authenticateUserUseCase;
         this.activateUserUseCase = activateUserUseCase;
+        this.cookieProperties = cookieProperties;
+        this.activationProperties = activationProperties;
     }
 
     @Override
     public ResponseEntity<Void> authenticate(AuthenticationRequest request) {
         var command = new AuthenticateUserCommand(request.getEmail(), request.getPassword());
         AuthenticationView response = this.authenticateUserUseCase.execute(command);
+
         ResponseCookie cookie = ResponseCookie.from("token", response.token())
                 .httpOnly(true)
-                .secure(false)
+                .secure(this.cookieProperties.secure())
                 .path("/")
-                .sameSite("Lax")
+                .sameSite(this.cookieProperties.sameSite())
                 .build();
 
         return ResponseEntity.ok()
@@ -47,7 +54,7 @@ public class AuthController implements AuthAPI {
         this.activateUserUseCase.execute(command);
 
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("http://localhost:5173/activation-success"))
+                .location(URI.create(this.activationProperties.successRedirectUrl()))
                 .build();
     }
 }

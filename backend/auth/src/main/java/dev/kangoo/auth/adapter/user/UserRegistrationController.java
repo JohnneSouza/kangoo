@@ -15,6 +15,7 @@ public class UserRegistrationController implements UserRegistrationAPI {
         this.userRegistrationUseCase = userRegistrationUseCase;
     }
 
+    @Override
     public UserRegistrationView register(UserRegistrationRequest request) {
         var command = new UserRegistrationCommand(
                 request.getFirstName(),

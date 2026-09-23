@@ -4,16 +4,15 @@ import dev.kangoo.auth.domain.repository.ActivationTokenRepository;
 import dev.kangoo.auth.domain.user.ActivationToken;
 import dev.kangoo.auth.infrastructure.persistence.entity.ActivationTokenEntity;
 import dev.kangoo.auth.infrastructure.persistence.mapper.ActivationTokenPersistenceMapper;
-import dev.kangoo.auth.infrastructure.repository.SpringDataActivationRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserActivationRepository implements ActivationTokenRepository {
+public class ActivationTokenRepositoryImpl implements ActivationTokenRepository {
 
     private final SpringDataActivationRepository activationRepository;
     private final ActivationTokenPersistenceMapper mapper;
 
-    public UserActivationRepository(SpringDataActivationRepository activationRepository, ActivationTokenPersistenceMapper mapper) {
+    public ActivationTokenRepositoryImpl(SpringDataActivationRepository activationRepository, ActivationTokenPersistenceMapper mapper) {
         this.activationRepository = activationRepository;
         this.mapper = mapper;
     }
@@ -26,7 +25,12 @@ public class UserActivationRepository implements ActivationTokenRepository {
 
     @Override
     public ActivationToken findByToken(String token) {
-        var activationToken = this.activationRepository.findByToken(token);
-        return this.mapper.toDomain(activationToken);
+        ActivationTokenEntity entity = this.activationRepository.findByToken(token);
+        return entity == null ? null : this.mapper.toDomain(entity);
+    }
+
+    @Override
+    public void deleteByToken(String token) {
+        this.activationRepository.deleteByToken(token);
     }
 }

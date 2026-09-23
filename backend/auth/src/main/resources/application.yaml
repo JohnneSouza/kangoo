@@ -36,3 +36,12 @@ security:
     private-key-pem: ${JWT_PRIVATE_KEY_PEM:}
     public-key-pem: ${JWT_PUBLIC_KEY_PEM:}
     expiration-minutes: 60
+
+kangoo:
+  activation:
+    base-url: ${ACTIVATION_BASE_URL:http://localhost:8080}
+    success-redirect-url: ${ACTIVATION_SUCCESS_REDIRECT_URL:http://localhost:5173/activation-success}
+  auth:
+    cookie:
+      secure: ${AUTH_COOKIE_SECURE:false}
+      same-site: Lax

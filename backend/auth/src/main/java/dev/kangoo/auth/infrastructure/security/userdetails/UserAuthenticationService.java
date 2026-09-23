@@ -1,8 +1,8 @@
 package dev.kangoo.auth.infrastructure.security.userdetails;
 
+import dev.kangoo.auth.infrastructure.persistence.SpringDataUserRepository;
 import dev.kangoo.auth.infrastructure.persistence.entity.UserEntity;
 import dev.kangoo.auth.infrastructure.persistence.mapper.UserPersistenceMapper;
-import dev.kangoo.auth.infrastructure.repository.SpringDataUserRepository;
 import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

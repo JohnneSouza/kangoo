@@ -8,4 +8,6 @@ public interface ActivationTokenRepository {
 
     ActivationToken findByToken(String token);
 
+    void deleteByToken(String token);
+
 }

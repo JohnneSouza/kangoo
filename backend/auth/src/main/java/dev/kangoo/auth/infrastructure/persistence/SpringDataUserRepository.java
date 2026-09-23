@@ -1,4 +1,4 @@
-package dev.kangoo.auth.infrastructure.repository;
+package dev.kangoo.auth.infrastructure.persistence;
 
 import dev.kangoo.auth.infrastructure.persistence.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

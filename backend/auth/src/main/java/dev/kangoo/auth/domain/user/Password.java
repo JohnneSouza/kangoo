@@ -14,12 +14,6 @@ public final class Password {
         return new Password(hashed);
     }
 
-    public static Password fromPlain(String plain) {
-        if (plain == null || plain.isBlank())
-            throw new IllegalArgumentException("Password cannot must be provided");
-        return new Password(plain);
-    }
-
     public String value(){
         return this.password;
     }

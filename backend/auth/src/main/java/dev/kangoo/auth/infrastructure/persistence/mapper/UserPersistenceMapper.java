@@ -19,7 +19,7 @@ public interface UserPersistenceMapper {
     @Mapping(target = "customerId", expression = "java(new CustomerId(entity.getCustomerId()))")
     @Mapping(target = "email", expression = "java(new Email(entity.getEmail()))")
     @Mapping(target = "password", expression = "java(Password.fromHashed(entity.getPassword()))")
-    @Mapping(target = "authority", expression = "java(Authority.roleUser())")
+    @Mapping(target = "authority", expression = "java(Authority.of(entity.getAuthority()))")
     @Mapping(target = "status", expression = "java(new Status(entity.isEnabled()))")
     User toUser(UserEntity entity);
 }

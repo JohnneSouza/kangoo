@@ -2,7 +2,7 @@ package dev.kangoo.auth.domain.user;
 
 public class Authority {
 
-    private Authority() {}
+    private static final String ROLE_USER = "ROLE_USER";
 
     private String authority;
 
@@ -11,7 +11,13 @@ public class Authority {
     }
 
     public static Authority roleUser() {
-        return new Authority("ROLE_USER");
+        return new Authority(ROLE_USER);
+    }
+
+    public static Authority of(String authority) {
+        if (authority == null || authority.isBlank())
+            throw new IllegalArgumentException("Authority cannot be null or blank");
+        return new Authority(authority);
     }
 
     public String value() {

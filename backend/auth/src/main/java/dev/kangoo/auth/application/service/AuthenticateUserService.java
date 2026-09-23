@@ -5,6 +5,7 @@ import dev.kangoo.auth.application.port.UserAuthenticator;
 import dev.kangoo.auth.application.usecase.AuthenticateUserCommand;
 import dev.kangoo.auth.application.usecase.AuthenticateUserUseCase;
 import dev.kangoo.auth.application.view.AuthenticationView;
+import dev.kangoo.auth.domain.user.Email;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,8 +21,11 @@ public class AuthenticateUserService implements AuthenticateUserUseCase {
 
     @Override
     public AuthenticationView execute(AuthenticateUserCommand command) {
+
+        Email email = new Email(command.email());
+
         var user = this.userAuthenticator.authenticate(
-                command.email(),
+                email.value(),
                 command.password()
         );
 

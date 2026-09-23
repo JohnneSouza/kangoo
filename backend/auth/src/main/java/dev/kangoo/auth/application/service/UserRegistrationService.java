@@ -1,9 +1,9 @@
 package dev.kangoo.auth.application.service;
 
 import dev.kangoo.auth.application.event.RegisterCustomerEvent;
+import dev.kangoo.auth.application.event.UserRegisteredEvent;
 import dev.kangoo.auth.application.port.CustomerRegistrationPublisher;
 import dev.kangoo.auth.application.port.PasswordEncoder;
-import dev.kangoo.auth.application.port.UserActivationNotificationSender;
 import dev.kangoo.auth.application.usecase.UserRegistrationCommand;
 import dev.kangoo.auth.application.usecase.UserRegistrationUseCase;
 import dev.kangoo.auth.application.view.UserRegistrationView;
@@ -16,6 +16,7 @@ import dev.kangoo.auth.domain.user.CustomerId;
 import dev.kangoo.auth.domain.user.Email;
 import dev.kangoo.auth.domain.user.Password;
 import dev.kangoo.auth.domain.user.User;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,34 +27,36 @@ public class UserRegistrationService implements UserRegistrationUseCase {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ActivationTokenRepository activationTokenRepository;
-    private final UserActivationNotificationSender notificationSender;
     private final CustomerRegistrationPublisher customerRegistrationPublisher;
+    private final ApplicationEventPublisher eventPublisher;
 
     public UserRegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder, ActivationTokenRepository activationTokenRepository,
-                                   CustomerRegistrationPublisher customerRegistrationPublisher, UserActivationNotificationSender notificationSender) {
+                                   CustomerRegistrationPublisher customerRegistrationPublisher, ApplicationEventPublisher eventPublisher) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.activationTokenRepository = activationTokenRepository;
         this.customerRegistrationPublisher = customerRegistrationPublisher;
-        this.notificationSender = notificationSender;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
     public UserRegistrationView execute(UserRegistrationCommand command) {
-        if (this.userRepository.existsByEmail(command.email()))
-            throw new UserAlreadyExistsException(command.email());
+        Email email = new Email(command.email());
+
+        if (this.userRepository.existsByEmail(email.value()))
+            throw new UserAlreadyExistsException(email.value());
 
         Password password = this.passwordEncoder.encode(command.password());
         CustomerId customerId = CustomerId.generate();
-        Email email = new Email(command.email());
         Authority authority = Authority.roleUser();
 
         ActivationToken activationToken = ActivationToken.generateActivationToken(customerId);
 
         var user = User.register(customerId, email, password, authority);
         this.userRepository.save(user);
-        this.notificationSender.send(email, activationToken.token());
         this.activationTokenRepository.save(activationToken);
+
+        this.eventPublisher.publishEvent(new UserRegisteredEvent(email, activationToken.token()));
 
         this.customerRegistrationPublisher
                 .publish(new RegisterCustomerEvent(

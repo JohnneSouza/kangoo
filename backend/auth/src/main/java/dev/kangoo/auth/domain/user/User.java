@@ -11,8 +11,6 @@ public class User {
     private Authority authority;
     private Status status;
 
-    private User() {}
-
     public static User register(CustomerId id, Email email, Password pw, Authority auth) {
         return new User(id, email, pw, auth, new Status(false));
     }
