@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: auth
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  mail:
+    host: localhost
+    port: 1025
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+# The signing key is never bundled with the application: the PEM contents are injected from the
+# environment. See README.md for how to generate the keypair and export these variables.
+security:
+  jwt:
+    key-id: ${JWT_KEY_ID:kangoo-auth-2026-09}
+    private-key-pem: ${JWT_PRIVATE_KEY_PEM:}
+    public-key-pem: ${JWT_PUBLIC_KEY_PEM:}
+    expiration-minutes: 60
+
+kangoo:
+  activation:
+    base-url: ${ACTIVATION_BASE_URL:http://localhost:8080}
+    success-redirect-url: ${ACTIVATION_SUCCESS_REDIRECT_URL:http://localhost:5173/activation-success}
+  auth:
+    cookie:
+      secure: ${AUTH_COOKIE_SECURE:false}
+      same-site: Lax

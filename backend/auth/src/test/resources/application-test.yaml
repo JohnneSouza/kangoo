@@ -1,0 +1,44 @@
+# Test-only signing key. It signs nothing but tokens created during tests, and is deliberately
+# committed so `mvn test` runs without any environment setup. Never use it outside tests.
+security:
+  jwt:
+    key-id: test-key
+    private-key-pem: |
+      -----BEGIN PRIVATE KEY-----
+      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+ltT6lOca+MyP
+      QuAA2LKlanhYMqkykWloU45nBdjw86omYCckylMxTYJa9MElr4dlfQDScDsmtgek
+      B4pJyoriXGEmrOBGHDY4z0sYO/Xi6iMKp7j0du+vUio48JXFR0iTVJDwjdDYCpT/
+      VWMY1hSzB+3jZowm37x60akc/zJBafFD+NRLZ9a00xBwEfGxxCUzAUZlPJVqMnwc
+      kbMZDi2gsQA7Ir9hEqBRYtf0rJQTsFCz4kjKFsTGnq7zV+oM6jqpkMf/Rm0aVMF5
+      hkDxCoTFpxznMSCjoTFgX8rONlA9jv/l8j5vBOV8CE2PCNEDcGs3Gd+XhmPF69sd
+      Y+Xg09k9AgMBAAECggEAJc9TgkDPFl08a8FnIhPbYRCdvlWSlnsdj7pf2lVhI/Ab
+      FdDmgxh2Z6YKUdQTi0/myv4BDz5/pZ7gJizuxNPfOKf+CAes2IvZP+zz52Nh1PoB
+      KKh8e1crFrt0r+YeuEv7fGr+9BIWV/3FcGA2sCMsaRYOHhpmfIHPaQg2BhAknrA3
+      pOcUK+a+T7Zb+5AXTwRV+gYMW18g71ICJj42GiY/FfLlPpShNogRPY2NafBijDAJ
+      rfFptA/JChmrEjutyQVC/J6F/KkevJhWG4DBnf03iOjoteypGxteMV41FifPEkHd
+      PCrncnnGqgRK4w2kvh3JKD/rK4rH1PvjV70mlNFESwKBgQDjTIYZC6gA3qZj0oLc
+      IkyEHW6n6qXDf2uq9QIPJzyhcGWl1Wi7HK6j5YsowYB2o1W00ngEdvQ78Xe0lgoy
+      xB96I5f9puLzsqLl/vGpei0K7TsAmCJVfOOZWY6Cf/kLO0+gTr0XJgrYWXkpDGFL
+      3n8KRH7mEvJenWZznFGNi7/dBwKBgQDWp6jls30zNSfny59Ps/W+eXMvr0KhE7QX
+      plaP4hlaQDlVOq1FfLpj8HL696I0zLfdEJStJSitAWbKPnRHTZ15g3iTn389POgo
+      kYgnsGIMamA0oRlOtH1b6wvzJh95XQAM5tdbkwbOxVjtkYAEHEJPKDM9QyEmpVT4
+      YYdCF9NKmwKBgQCL7TsMRhG531c9UoW+sNq75kaN1rUPQeztRIFtBLGdjMz2pwcf
+      UUvtl8zwXRcRcgG8HGlIDlbSZBdWM5u5nuTl0u2peEh0z77aqfTpaU47UMmm1wEj
+      8YtHh0tk6RVOpceiH3bmvkOk5ofhDj8Dbsh0cLBSQM22E13TxCKsaaDGlwKBgG4T
+      vIFO8j14XOZ5fVEaMENldLRXZAvGVuxp2KoggG/Pz5btaD3iIJNvkwcwRnZdJUyw
+      XA4OqDVQKq48KNUH8GGIEiVh/ZYhzcxAFVqFEULcqklS8+9wj3i7qH0gZ7ONBaGY
+      H4hOdYdDnL73hnaVJ0wAiYY5Dp8K2fAl038JSMlRAoGBALaqA1WGuMoBa94Fnmhd
+      3wgMlDOY26leDrZliQmbndQgMNssgKiUrQwPZYQ4S6aBCNh7y3/0rGuuPnzE/zbD
+      kXWS9p/n4tY3QK9aUnh+x6K9yT7kkmRyWG9/CgDUuy5/ROmx9aW6HyJe2Rx9u3Bu
+      frL8r43BPXkxreHoDZhwypje
+      -----END PRIVATE KEY-----
+    public-key-pem: |
+      -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvpbU+pTnGvjMj0LgANiy
+      pWp4WDKpMpFpaFOOZwXY8POqJmAnJMpTMU2CWvTBJa+HZX0A0nA7JrYHpAeKScqK
+      4lxhJqzgRhw2OM9LGDv14uojCqe49Hbvr1IqOPCVxUdIk1SQ8I3Q2AqU/1VjGNYU
+      swft42aMJt+8etGpHP8yQWnxQ/jUS2fWtNMQcBHxscQlMwFGZTyVajJ8HJGzGQ4t
+      oLEAOyK/YRKgUWLX9KyUE7BQs+JIyhbExp6u81fqDOo6qZDH/0ZtGlTBeYZA8QqE
+      xacc5zEgo6ExYF/KzjZQPY7/5fI+bwTlfAhNjwjRA3BrNxnfl4ZjxevbHWPl4NPZ
+      PQIDAQAB
+      -----END PUBLIC KEY-----
